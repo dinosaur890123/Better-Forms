@@ -8,3 +8,23 @@
   margin-bottom: 4rem;
   align-items: center;
 }
+.logo {
+  /* reminder to self for logo later */
+}
+.button {
+  background-color: #2a46a1;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6.7px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: 1px #3957ba;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #4134c7;
+}
+.main {
+  display: flex;
+  gap: 2rem;
+}
