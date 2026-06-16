@@ -73,19 +73,98 @@ export default function Home() {
 
     setForms(
       forms.map((f) =>
-        f.id === activeForm.id ? { ...f, fields: [...f.fields, newField] } : f
+        f.id === activeForm.id ? {...f, fields: [...f.fields, newField]} : f
       )
     );
   };
-  }
+  
+  const deleteField = (fieldId: string) => {
+    if (!activeForm) return;
+    setForms(
+      forms.map((f) =>
+        f.id === activeForm.id ? { ...f, fields: f.fields.filter((fd) => fd.id !== fieldId)} : f
+      )
+    );
+  };
+
+
+  const updateFieldLabel = (fieldId: string, label: string) => {
+    if (!activeForm) return;
+    setForms(
+      forms.map((f) =>
+        f.id === activeForm.id
+          ? {
+              ...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, label} : fd)
+            } : f
+      )
+    );
+  };
+
+  const testSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeForm) return;
+    setForms(
+      forms.map((f) => f.id === activeForm.id ? {...f, responses: f.responses + 1} : f
+      )
+    );
+    alert("Response submitted successfully.");
+    setSelectedFormId(null);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.logo}>Better Forms</div>
-        <button className={styles.button}>New Form</button>
+        <div className={styles.logo} onClick={() => setSelectedFormId(null)} style={{cursor: "pointer"}}>Better Forms</div>
+        {selectedFormId === null ? (<button className={styles.button} onClick={() => setShowCreateModal(true)}>New Form</button>)
+        :
+        (<button className={styles.secondaryButton} onClick={() => setSelectedFormId(null)}>Back to Forms</button>)
+        }
       </header>
 
       <main className={styles.main}>
+        {selectedFormId === null ? (
+          <>
+            <h1 className={styles.title}>Your Forms</h1>
+            <div className={styles.grid}>
+              {forms.map((form) => (
+                <div key={form.id} className={styles.card} onClick={() => setSelectedFormId(form.id)}>
+                  <div className={styles.cardHeader}>
+                    <h3>{form.title}</h3>
+                    <button 
+                      className={styles.deleteLink} onClick={(e) => handleDeleteForm(e, form.id)}>Delete</button>
+                  </div>
+                  <p>{form.responses} responses</p>
+                </div>
+              ))}
+              </div>
+          </>
+        ):(
+          activeForm && (
+            <div className={styles.workspace}>
+              <div className={styles.editorPanel}>
+                <div className={styles.panelHeader}>
+                  <h2>Edit Form Questions</h2>
+                  <p>You can customise the question labels below.</p>
+                </div>
+                <div className={styles.fieldsList}>
+                  {activeForm.fields.map((field, idx) => (
+                    <div key={field.id} className={styles.editorFieldCard}>
+                      <div className={styles.fieldHeader}>
+                        <span className={styles.fieldBadge}>Q{idx + 1} ({field.type})</span>
+                        <button className={styles.deleteLink} onClick={() => deleteField(field.id)}>Remove</button>
+                      </div>
+                      <input type="text" className={styles.fieldInput} value={field.label} onChange={(e) => updateFieldLabel(field.id, e.target.value)} placeholder="Enter question label..."/>
+                    </div>
+                  ))}
+                </div>
+
+
+              </div>
+            </div>
+          )
+        )
+
+
         <h1 className={styles.title}>Your Forms</h1>
 
         <div className={styles.grid}>
