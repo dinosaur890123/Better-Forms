@@ -42,7 +42,7 @@ export default function Home() {
 
   const activeForm = forms.find((f) => f.id === selectedFormId);
 
-  const handleCreateForm = (e: React.formEvent) => {
+  const handleCreateForm = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newFormTitle.trim()) return;
 
@@ -158,23 +158,57 @@ export default function Home() {
                   ))}
                 </div>
 
-
+                <div className={styles.builderToolbar}>
+                  <button className={styles.toolBtn} onClick={() => addField("text")}>Add Text Question</button>
+                  <button className={styles.toolBtn} onClick={() => addField("checkbox")}>Add Checkbox</button>
+                </div>
+              </div>
+              <div className={styles.testerPanel}>
+                <div className={styles.panelHeader}>
+                  <h2>Form Preview</h2>
+                  <p>Submit responses to test the form functionality.</p>
+                </div>
+                <form onSubmit={testSubmit} className={styles.testFormCard}>
+                  <h3 className={styles.testFormTitle}>{activeForm.title}</h3>
+                  {activeForm.fields.length === 0 ? (
+                    <p style={{color: "#64748b", fontSize: "0.867rem", textAlign: "center", padding: "2rem"}}>No fields added yet, you should add questions on the left panel!</p>
+                  ): (
+                    activeForm.fields.map((field) => {
+                      <div key={field.id} className={styles.formGroup}>
+                        <label className={styles.formLabel}>{field.label}</label>
+                        {field.type === "text" ? (
+                          <input type="text" placeholder="Your answer..." className={styles.textInput}/>
+                        ):(
+                          <div className={styles.checkboxGroup}>
+                            <input type="checkbox" id={field.id} className={styles.checkbox}/>
+                            <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#475569" }}>Confirm</label>
+                          </div>
+                        )}
+                      </div>
+                    })
+                  )}
+                  {activeForm.fields.length > 0 && (<button type="submit" className={styles.submitButton}>Submit Response</button>
+                  )}          
+                </form>
               </div>
             </div>
           )
-        )
-
-
-        <h1 className={styles.title}>Your Forms</h1>
-
-        <div className={styles.grid}>
-          {mockForms.map((form) => (
-            <div key={form.id} className={styles.card}>
-              <h3>{form.title}</h3>
-              <p>{form.responses} responses</p>
-            </div>
-          ))}
-        </div>
+        )}
       </main>
+
+      {showCreateModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowCreateModal(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h3>Create new form</h3>
+            <form onSubmit={handleCreateForm}>
+              <input type="text" className={styles.modalInput} placeholder="e.g. Customer Feedback Survey" value={newFormTitle} onChange={(e) => setNewFormTitle(e.target.value)} autoFocus/>
+              <div className={styles.modalActions}>
+                <button type="button" className={styles.secondaryButton} onClick={() => setShowCreateModal(false)}>Cancel</button>
+                <button type="submit" className={styles.button}>Create Form</button>
+              </div>
+            </form>
+        </div>
+
+      )}
     </div>
 }
