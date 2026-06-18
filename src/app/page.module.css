@@ -25,6 +25,35 @@
   background-color: #4134c7;
 }
 .main {
+  flex-direction: column;
   display: flex;
   gap: 2rem;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  display: grid;
+}
+.card {
+  padding: 1.67rem;
+  border: 1px solid #cbddf3;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+.card:hover {
+  border-color: #aec8e8;
+}
+.card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.card p {
+  font-size: 0.875rem;
+  color: #64748b;
 }
