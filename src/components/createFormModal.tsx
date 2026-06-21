@@ -18,7 +18,16 @@ export default function CreateFormModal({isOpen, onClose, onCreate}:CreateFormMo
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
-        <div clasName={styles.modal} onClick={(e) => e.stopPropagation()}></div>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h3>Create New Form</h3>
+            <form onSubmit={handleSubmit}>
+                <input type="text" className={styles.modalInput} placeholder="e.g. Customer Feedback Survey" value={title} onChange={(e) => setTitle(e.target.value)} autoFocus/>
+                <div className={styles.modalActions}>
+                    <button type="button" className="button button-secondary" onClick={onClose}>Cancel</button>
+                    <button type="submit" className="button button-primary">Create Form</button>
+                </div>
+            </form>
+        </div>
     </div>
-  )
+  );
 }
