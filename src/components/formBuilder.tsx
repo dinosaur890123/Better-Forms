@@ -40,8 +40,9 @@ export default function FormBuilder({
                                         <input type="text" className={styles.optionInput} value={option} onChange={(e) => onUpdateChoiceOption(field.id, optIdx, e.target.value)} placeholder={`Option ${optIdx + 1}`}/>
                                         <button type="button" className={styles.deleteOptionButton} onClick={() => onDeleteChoiceOption(field.id, optIdx)}>×</button>
                                         </div>
-                                    )}
+                                    ))}
                                 </div>
+                                <button type="button" ClassName={styles.addOptionButton} onClick={() => onAddChoiceOption(field.id)}>Add Option</button>
                             </div>
                         )}
 
