@@ -1,62 +1,54 @@
 "use client";
-import { useState } from "react";
+import {useState, useEffect} from "react";
 import styles from "./page.module.css";
-import { Form, FormField } from "../types/form";
+import {Form, FormField} from "../types/form";
 import Dashboard from "../components/Dashboard";
 import CreateFormModal from "../components/CreateFormModal";
 import FormBuilder from "../components/FormBuilder";
 import FormPreview from "../components/FormPreview";
+import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse} from "./actions";
 
 
 export default function Home() {
-  const [forms, setForms] = useState<Form[]>([
-    {
-      id: "feedback",
-      title: "Product feedback survey",
-      responses: 12,
-      fields: [
-        {id: "1", label: "What is your name?", type: "text"},
-        {id: "2", label: "Would you recommend us to a friend?", type: "checkbox"},
-        {id: "3", label: "How did you hear about us?", type: "choice", options: ["Google Search", "Social media", "Friend recommendation", "Other"]},
-        {id: "4", label: "Rate your overall experience", type: "rating" },
-        {id: "5", label: "Would you to our newsletter?", type: "checkbox"} // cringe
-      ]
-    },
-    {
-      id: "rsvp",
-      title: "Event RSVP", // sounds also kinda cringe, i'll change it out later on
-      responses: 4,
-      fields: [
-        {id: "1", label: "Email sddress", type: "text"},
-        {id: "2", label: "Do you need a place to park your car", type: "checkbox"}, // skull, genuinely first thing i thought of
-      ]
-    }
-  ]);
-
+  const [forms, setForms] = useState<Form[]>([]);
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [testResponses, setTestResponses] = useState<Record<string, any>>({});
 
   const activeForm = forms.find((f) => f.id === selectedFormId);
 
+  useEffect(() => {
+    async function loadForms() {
+      setIsLoading(true);
+      const dbForms = await getForms();
+      setForms(dbForms);
+      setIsLoading(false);
+    }
+    loadForms();
+  }, []);
+
   const handleCreateForm = (title: string) => {
-    const newForm: Form = {
-      id: Date.now().toString(),
-      title,
-      responses: 0,
-      fields: [
-        {id: "1", label: "Full name", type: "text"}
-      ]
-    };
-    setForms([...forms, newForm]);
-    setSelectedFormId(newForm.id);
+    const newForm = await createForm(title);
+    if (newForm) {
+      setForms([newForm, ...forms]);
+      setSelectedFormId(newForm.id);
+      setTestResponses({});
+    } else {
+      alert("Failed to create form in the database.");
+    }
     setShowCreateModal(false);
-    setTestResponses({});
   };
-  const handleDeleteForm = (e: React.MouseEvent, id: string) => {
+ const handleDeleteForm = async (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    setForms(forms.filter((f) => f.id !== id));
-    if (selectedFormId === id) setSelectedFormId(null);
+    const success = await deleteForm(id);
+    if (success) {
+      setForms(forms.filter((f) => f.id !== id));
+      if (selectedFormId === id) setSelectedFormId(null);
+    } else {
+        alert("Failed to delete the form from the database");
+    }
   };
 
   const addField = (type: "text" | "checkbox" | "choice" | "rating" | "email") => {
@@ -126,6 +118,18 @@ export default function Home() {
     );
   };
 
+  const handleSaveFields = async () => {
+    if (!activeForm) return;
+    setIsSaving(true);
+    const success = await saveFormFields(activeForm.id, activeForm.fields);
+    setIsSaving(false);
+    if (success) {
+      alert("Form changes saved to database successfully!");
+    } else {
+      alert("Failed to save form changes");
+    }
+  }
+
   const handleTestValueCHange = (fieldId: string, value: any) => {
     setTestResponses({
       ...testResponses,
@@ -141,16 +145,21 @@ export default function Home() {
   }
 
   
-  const testSubmit = (e: React.FormEvent) => {
+  const testSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeForm) return;
-    setForms(
-      forms.map((f) => f.id === activeForm.id ? {...f, responses: f.responses + 1} : f
-      )
-    );
-    alert(`Response submitted successfully!\n\nData captured:\n${JSON.stringify(testResponses, null, 2)}`);
-    setSelectedFormId(null);
-    setTestResponses({});
+    setIsSaving(true);
+    const success = await submitFormResponse(activeForm.id, testResponses);
+    setIsSaving(false);
+
+    if (success) {
+      alert(`Response recorded in Postgres!\n\nData Submitted:\n${JSON.stringify(testResponses, null, 2)}`);
+      setSelectedFormId(null);
+      setTestResponses({});
+      setForms(await getForms());
+    } else {
+      alert("Failed to submit form response");
+    }
   };
 
   return (
@@ -159,7 +168,11 @@ export default function Home() {
         <div className={styles.logo} onClick={() => setSelectedFormId(null)} style={{cursor: "pointer"}}>Better Forms</div>
         {selectedFormId === null ? (<button className={styles.button} onClick={() => setShowCreateModal(true)}>New Form</button>)
         :
-        (<button className={styles.secondaryButton} onClick={() => setSelectedFormId(null)}>Back to Forms</button>)
+        (
+          <div style={{display: "flex", gap: "0.67rem"}}>
+            <button className="button button-secondary" 
+          </div>
+        )
         }
       </header>
 
