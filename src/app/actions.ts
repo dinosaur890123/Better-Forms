@@ -119,3 +119,48 @@ export async function submitFormResponse(formId: string, answers: Record<string,
         return false;
     }
 }
+export async function getPublicForm(id: string): Promise<Form | null> {
+    try {
+        const f = await prisma.form.findUnique({
+            where: {id},
+            include: {
+                fields: {
+                    orderBy: {order: "asc"}
+                }
+            }
+        });
+
+        if (!f) return null;
+
+        return {
+            id: f.id, 
+            title: f.title, 
+            responses: f.responses, 
+            fields: f.fields.map((fd) => {
+                id: fd.id,
+                label: fd.label,
+                type: fd.type as FormField["type"],
+                options: fd.options
+            })
+        };
+    } catch (error) {
+        console.error("Failed to fetch form:", error);
+        return null;
+    }
+}
+
+export async function getFormSubmissions(
+    formId:string
+): Promise<{id: string; answers: Record<string, any>; submittedAt: Date}[]> {
+    try {
+        const submissions = await prisma.submission.findMany({
+            where: {formId}, orderBy: {submittedAt: "desc"}
+        });
+
+        return submissions.map((s) => ({
+            id: s.id,
+            answers: (s.answers as Record<string, any>) ?? {},
+            submittedAt: s.submittedAt
+        })
+    }
+} 
