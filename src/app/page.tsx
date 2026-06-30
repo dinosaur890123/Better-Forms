@@ -1,5 +1,6 @@
 "use client";
 import {useState, useEffect} from "react";
+import Link from "next/link";
 import styles from "./page.module.css";
 import {Form, FormField} from "../types/form";
 import Dashboard from "../components/Dashboard";
@@ -129,6 +130,13 @@ export default function Home() {
       alert("Failed to save form changes");
     }
   }
+  const handleShareLink = (id: string) => {
+    const url = `${window.location.origin}/form/${id}`;
+    navigator.clipboard.writeText(url).then(
+      () => alert(`Public link copied:\n${url}`),
+      () => alert(`Share this link:\n${url}`)
+    )
+  };
 
   const handleTestValueCHange = (fieldId: string, value: any) => {
     setTestResponses({
@@ -170,13 +178,25 @@ export default function Home() {
         :
         (
           <div style={{display: "flex", gap: "0.67rem"}}>
-            <button className="button button-secondary" 
+            {selectedFormId && (
+              <Link href={`/forms/${selectedFormId}/responses`} className="button button-secondary">
+                Responses
+              </Link>
+            )}
+            {selectedFormId && (
+              <button className="button button-secondary" onClick={() => handleShareLink(selectedFormId)} disabled={isSaving}>
+                Share
+              </button>
+            )}
+            <button className="button button-secondary" onClick={handleSaveFields} disabled={isSaving}>{isSaving ? "Saving..." : "Save Changes"}</button>
+            <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
           </div>
         )
         }
       </header>
 
       <main className={styles.main}>
+        
         {selectedFormId === null ? (
           <Dashboard forms={forms} onSelectForm={setSelectedFormId} onDeleteForm={handleDeleteForm}/>
         ):(
