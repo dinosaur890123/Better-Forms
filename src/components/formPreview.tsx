@@ -29,30 +29,20 @@ export default function FormPreview({
                     <label className={styles.formLabel}>{field.label}</label>
 
                     {field.type === "text" && (
-                        <input type="email" placeholder="example@example.com" className={styles.textInput} value={testResponses[field.id] || ""} onChange={(e) => onTestValueChange(field.id, e.target.value)}/>
+                        <input type="text" placeholder="Your answer" className={styles.textInput} value={testResponses[field.id] || ""} onChange={(e) => onTestValueChange(field.id, e.target.value)}/>
                     )}
                     {field.type === "rating" && (
-                        <div className={styles.ratingStars}>{[1, 2, 3, 4, 5].map((star) => (<button key={star} type="button" className={`${styles.starButton} ${(testResponses[field.id] || 0) >= star ? styles.starActive : ""}`} onClick={() => onTestValueChange(field.id, star)})>Star</button></div>
+                        <div className={styles.ratingStars}>{[1, 2, 3, 4, 5].map((star) => (<button key={star} type="button" className={`${styles.starButton} ${(testResponses[field.id] || 0) >= star ? styles.starActive : ""}`} onClick={() => onTestValueChange(field.id, star)}>★</button>))}</div>
                     )}
 
                     {field.type === "choice" && (
                         <div className={styles.choiceGroup}>
-                            {field.options?.map((option, optIdx) => {
+                            {field.options?.map((option, optIdx) => (
                                 <label key={optIdx} className={styles.choiceLabel}>
                                     <input type="radio" name={`choice-${field.id}`} value={option} checked={testResponses[field.id] === option} onChange={() => onTestValueChange(field.id, option)} className={styles.radioInput}/>
                                     <span>{option}</span>
                                 </label>
-                            }}
-                        </div>
-                    )}
-                    {field.type === "choice" && (
-                        <div className={styles.choiceGroup}>
-                            {field.options?.map((option, optIdx) => {
-                                <label key={optIdx} className={styles.choiceLabel}>
-                                    <input type="radio" name={`choice-${field.id}`} value={option} checked={testResponses[field.id] === option} onChange={() => onTestValueChange(field.id, option)} className={styles.radioInput}/>
-                                    <span>{option}</span>
-                                </label>
-                            })}
+                            ))}
                         </div>
                     )}
                     {field.type === 'checkbox' && (
@@ -63,7 +53,7 @@ export default function FormPreview({
                     )}
                 </div>
             ))
-        ))
+        )}
         {form.fields.length > 0 && (
             <button type="submit" className={styles.submitBtn}>Submit response</button>
         )}

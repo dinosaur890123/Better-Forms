@@ -3,10 +3,10 @@ import {useState, useEffect} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import {Form, FormField} from "../types/form";
-import Dashboard from "../components/Dashboard";
-import CreateFormModal from "../components/CreateFormModal";
-import FormBuilder from "../components/FormBuilder";
-import FormPreview from "../components/FormPreview";
+import Dashboard from "../components/dashboard";
+import CreateFormModal from "../components/createFormModal";
+import FormBuilder from "../components/formBuilder";
+import FormPreview from "../components/formPreview";
 import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse} from "./actions";
 
 
@@ -98,8 +98,7 @@ export default function Home() {
   const addChoiceOption = (fieldId: string) => {
     if (!activeForm) return;
     setForms(
-      forms.map((f) => f.id === activeForm.id ? {...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, options: fd.options?.map((opt, idx) => (idx === optionIdx ? value : opt))}:fd)}:f)
-      // crazy trial and error in the line above
+      forms.map((f) => f.id === activeForm.id ? {...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, options: [...(fd.options || []), `Option ${(fd.options?.length || 0) + 1}`]} : fd)} : f)
     );
   };
 
@@ -227,5 +226,6 @@ export default function Home() {
         onClose={() => setShowCreateModal(false)}
         onCreate={handleCreateForm}
       />
+    </div>
   );
 }
