@@ -67,9 +67,35 @@ export default function PublicForm({form}: {form: Form}) {
                             </div>
                         )}
 
-                        {field.}
+                        {field.type === "choice" && (
+                            <div className={styles.choiceGroup}>
+                                {field.options?.map((option, optIdx) => {
+                                    <label key={optIdx} className={styles.choiceLabel}>
+                                        <input type="radio" name={`choice-${field.id}`} value={option} checked={responses[field.id] === option} onChange={() => setValue(field.id, option)} className={styles.radioInput}/>
+                                        <span>{option}</span>
+                                    </label>
+                                })}
+                            </div>
+                        )}
+
+                        {field.type === "checkbox" && (
+                            <div className={styles.checkboxGroup}>
+                                <input type="checkbox" id={field.id} className={styles.checkbox} checked={responses[field.id] || false} onChange={(e) => setValue(field.id, e.target.checked)}/>
+                                <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#5d718c"}}>Confirm</label>
+                            </div>
+                        )}
                     </div>
                 })
+            )}
+
+            {error && (
+                <p style={{color: "#d93f3f", fontSize: "0.8267rem", marginBottom: "1rem" }}>
+                    Something went wrong, try again.
+                </p>
+            )}
+
+            {form.fields.length > 0 && (
+                <button type="submit" className="button button-success" style={{width: "100%", marginTop: "0.rem"}} disabled={submitting}>{submitting ? "Submitting..." : "Submit response"}</button>
             )}
         </form>
     )

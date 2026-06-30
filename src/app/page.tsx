@@ -30,7 +30,7 @@ export default function Home() {
     loadForms();
   }, []);
 
-  const handleCreateForm = (title: string) => {
+  const handleCreateForm = async (title: string) => {
     const newForm = await createForm(title);
     if (newForm) {
       setForms([newForm, ...forms]);
@@ -98,7 +98,7 @@ export default function Home() {
   const addChoiceOption = (fieldId: string) => {
     if (!activeForm) return;
     setForms(
-      forms.map((f) => f.id === activeForm.id ? {...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, ptions: fd.options?.map((opt, idx) => (idx === optionIdx ? value : opt))}:fd)}:f)
+      forms.map((f) => f.id === activeForm.id ? {...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, options: fd.options?.map((opt, idx) => (idx === optionIdx ? value : opt))}:fd)}:f)
       // crazy trial and error in the line above
     );
   };
@@ -138,7 +138,7 @@ export default function Home() {
     )
   };
 
-  const handleTestValueCHange = (fieldId: string, value: any) => {
+  const handleTestValueChange = (fieldId: string, value: any) => {
     setTestResponses({
       ...testResponses,
       [fieldId]: value

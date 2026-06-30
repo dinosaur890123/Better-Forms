@@ -48,7 +48,7 @@ export async function createForm(title: string): Promise<Form | null> {
             }
         });
 
-        return (
+        return {
             id: newForm.id,
             title: newForm.title,
             responses: newForm.responses,
@@ -58,7 +58,7 @@ export async function createForm(title: string): Promise<Form | null> {
                 type: fd.type as FormField["type"],
                 options: fd.options
             }))
-        );
+        };
     } catch (error) {
         console.error("Failed to create the form:", error);
         return null;
@@ -80,7 +80,7 @@ export async function deleteForm(id: string): Promise<boolean> {
 export async function saveFormFields(formId: string, fields: FormField[]): Promise<boolean> {
     try {
         await prisma.$transaction([
-            prisma.formformField.deleteMany({where: {formId}}),
+            prisma.formField.deleteMany({where: {formId}}),
             prisma.formField.createMany({
                 data: fields.map((field, idx) => ({
                     id: field.id,
@@ -136,12 +136,12 @@ export async function getPublicForm(id: string): Promise<Form | null> {
             id: f.id, 
             title: f.title, 
             responses: f.responses, 
-            fields: f.fields.map((fd) => {
+            fields: f.fields.map((fd) => ({
                 id: fd.id,
                 label: fd.label,
                 type: fd.type as FormField["type"],
                 options: fd.options
-            })
+            }))
         };
     } catch (error) {
         console.error("Failed to fetch form:", error);
@@ -161,6 +161,6 @@ export async function getFormSubmissions(
             id: s.id,
             answers: (s.answers as Record<string, any>) ?? {},
             submittedAt: s.submittedAt
-        })
+        }))
     }
 } 

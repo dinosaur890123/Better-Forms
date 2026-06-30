@@ -42,11 +42,10 @@ export default function FormBuilder({
                                         </div>
                                     ))}
                                 </div>
-                                <button type="button" ClassName={styles.addOptionButton} onClick={() => onAddChoiceOption(field.id)}>Add Option</button>
+                                <button type="button" className={styles.addOptionButton} onClick={() => onAddChoiceOption(field.id)}>Add Option</button>
                             </div>
                         )}
-
-                        </div>
+                    </div>
                 ))}
             </div>
         </div>

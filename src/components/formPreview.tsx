@@ -14,12 +14,14 @@ export default function FormPreview({
 }: FormPreviewProps) {
     return (
         <div className={styles.testerPanel}>
-            <h2>Test form preview</h2>
-            <p>Submit responses to test form functionality.</p>
-        </div>
+            <div className={styles.panelHeader}>
+                <h2>Test form preview</h2>
+                <p>Submit responses to test form functionality.</p>
+            </div>
+
         <form onSubmit={onSubmit} className={styles.testFormCard}>
-        <h3 className={styles.testFormTitle}>{form.title}</h3>
-        (form.fields.length === 0 ? (
+            <h3 className={styles.testFormTitle}>{form.title}</h3>
+        {form.fields.length === 0 ? (
             <p style={{color: "#64748b", fontSize: "0.867rem", textAlign: "center", padding: "2rem"}}>No fields added. Add questions on the left panel</p>
         ):(
             form.fields.map((field) => (
@@ -62,6 +64,10 @@ export default function FormPreview({
                 </div>
             ))
         ))
+        {form.fields.length > 0 && (
+            <button type="submit" className={styles.submitBtn}>Submit response</button>
+        )}
         </form>
+    </div>
     )
 }
