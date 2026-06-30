@@ -162,5 +162,8 @@ export async function getFormSubmissions(
             answers: (s.answers as Record<string, any>) ?? {},
             submittedAt: s.submittedAt
         }))
+    } catch (error) {
+        console.error("Failed to fetch form submissions:", error);
+        return [];
     }
 } 

@@ -47,7 +47,7 @@ export default function PublicForm({form}: {form: Form}) {
                     This form doesn't have questions
                 </p>
             ):(
-                form.fields.map((field) => {
+                form.fields.map((field) => (
                     <div key={field.id} className={styles.formGroup}>
                         <label className={styles.formLabel}>{field.label}</label>
 
@@ -85,7 +85,7 @@ export default function PublicForm({form}: {form: Form}) {
                             </div>
                         )}
                     </div>
-                })
+                ))
             )}
 
             {error && (

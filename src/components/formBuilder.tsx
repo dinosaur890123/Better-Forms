@@ -27,7 +27,7 @@ export default function FormBuilder({
                         <div className={styles.fieldHeader}>
                             <span className={styles.fieldBadge}>Q{idx + 1} ({field.type})</span>
                             <button className={styles.deleteLink} onClick={() => onDeleteField(field.id)}>Remove</button>                            
-                        <div>
+                        </div>
                         
                         <input type="text" className={styles.fieldInput} value={field.label} onChange={(e) => onUpdateFieldLabel(field.id, e.target.value)} placeholder="Enter question label here"/>
 
@@ -48,7 +48,6 @@ export default function FormBuilder({
                     </div>
                 ))}
             </div>
-        </div>
         <div className={styles.builderToolbar}>
         <div className={styles.toolbarGrid}>
           <button className={styles.toolButton} onClick={() => onAddField("text")}>
