@@ -1,0 +1,24 @@
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(267px, 1fr));
+    gap: 1.5rem;
+}
+.card {
+    background-color: white;
+    border: 1px solid #b6c9e0;
+    border-radius: 10px;
+    padding: 1.67rem;
+    cursor: pointer;
+}
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
