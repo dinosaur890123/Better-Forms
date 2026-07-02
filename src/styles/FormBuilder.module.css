@@ -48,3 +48,65 @@
 .optionsManager {
     margin-top: 0.67rem;
 }
+
+.optionsLabel {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.67rem;
+}
+
+.optionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.67rem;
+    margin-bottom: 0.67rem;
+}
+
+.optionRow {
+    display: flex;
+    gap: 0.67rem;
+}
+
+.optionInput {
+    flex: 1;
+    border: 1px solid #cbd5e1;
+    border-radius: 6.7px;
+}
+
+.deleteOptionButton {
+    background: none;
+    border: none;
+    color: #dc2626;
+}
+
+.addOptionButton {
+    background-color: #dce2f4;
+    color: #4f46e5;
+    border: none;
+    border-radius: 6.7px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+.builderToolbar {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.67rem;
+    margin-top: 1.67rem;
+}
+.toolbarGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.67rem;
+}
+.toolButton {
+    background-color: #2a46a1;
+    color: white;
+    border: none;
+    border-radius: 6.7px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.toolButton:hover {
+    background-color: #4134c7;
+}
