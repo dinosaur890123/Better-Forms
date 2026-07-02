@@ -2,6 +2,7 @@
     background-color: white;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
+    padding: 1.67rem;
 }
 .panelHeader {
     margin-bottom: 1.67rem;
@@ -13,7 +14,9 @@
 
 .fieldsList {
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.567rem;
+    display: flex;
+    flex-direction: column;
 }
 .editorFieldCard {
     border: 1px solid #e2e8f0;
@@ -23,7 +26,8 @@
 .fieldHeader {
     justify-content: space-between;
     align-items: center;
-
+    display: flex;
+    margin-bottom: 0.67rem;
 }
 
 .fieldBadge {
@@ -43,6 +47,7 @@
     width: 100%;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
+    padding: 0.67rem;
 }
 
 .optionsManager {
@@ -72,16 +77,20 @@
     flex: 1;
     border: 1px solid #cbd5e1;
     border-radius: 6.7px;
+    padding: 0.5rem;
 }
 
 .deleteOptionButton {
     background: none;
     border: none;
     color: #dc2626;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .addOptionButton {
     background-color: #dce2f4;
+    padding: 0.5rem 0.8rem;
     color: #4f46e5;
     border: none;
     border-radius: 6.7px;
@@ -104,6 +113,7 @@
     border: none;
     border-radius: 6.7px;
     cursor: pointer;
+    padding: 0.5rem 0.8rem;
     font-weight: 500;
 }
 
