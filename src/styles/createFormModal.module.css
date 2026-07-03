@@ -1,11 +1,17 @@
 .modalOverlay {
     position: fixed;
+    inset: 0;
+    background-color: rgba(36, 54, 95, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .modal {
     background-color: white;
     border-radius: 12px;
     width: 100%;
     max-width: 400px;
+    padding: 1.67rem;
 }
 .modalInput {
     width: 100%;
