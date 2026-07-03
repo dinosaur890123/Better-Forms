@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-// import styles from "../styles/createFormModal.module.css";
+import styles from "../styles/createFormModal.module.css";
 
 interface CreateFormModalProps {
   isOpen: boolean;
