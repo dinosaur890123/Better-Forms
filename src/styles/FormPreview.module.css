@@ -1,5 +1,8 @@
 .testerPanel {
     background-color: white;
+    border: 1px solid #c6ced9;
+    border-radius: 12px;
+    padding:1.67rem;
 }
 .panelHeader {
   margin-bottom: 1.67rem;
@@ -7,10 +10,13 @@
 
 .testFormCard {
     display: flex;
+    flex-direction: column;
+    gap: 1.167rem;
 }
 .testFormTitle {
     font-size: 1.267rem;
     font-weight: 670;
+    margin-bottom: 0.67rem;
 }
 .formGroup {
     flex-direction: column;
@@ -47,4 +53,26 @@
 
 .choiceLabel {
     align-items: center;
+}
+.radioInput {
+    accent-color: #2a46a1;
+}
+.checkboxGroup {
+    align-items: center;
+    gap: 0.67rem;
+}
+.checkbox {
+    accent-color: #2747b0;
+}
+.submitButton {
+    background-color: #3452b4;
+    color: white;
+    border: none;
+    border-radius: 6.7px;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.submitButton:hover {
+    background-color: #4134c7;
 }

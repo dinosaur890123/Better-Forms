@@ -1,0 +1,42 @@
+.container {
+    font-family: Calibri;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+.leftHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.backButton {
+    color: #4f46e5;
+    font-size: 0.867rem;
+    font-weight: 600;
+}
+.backButton:hover {
+    text-decoration: underline;
+}
+.formTitleInput {
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: transparent;
+}
+
+.statusIndicator {
+    align-items: center;
+    color: #64748b;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    display: inline-block;
+}
+.rightHeader {
+    align-items: center;
+}

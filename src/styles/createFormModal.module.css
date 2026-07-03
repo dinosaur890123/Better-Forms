@@ -1,0 +1,19 @@
+.modalOverlay {
+    position: fixed;
+}
+.modal {
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+.modalInput {
+    width: 100%;
+    padding: 0.67rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.modalActions {
+    justify-content: flex-end;
+}
