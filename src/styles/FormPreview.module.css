@@ -1,0 +1,50 @@
+.testerPanel {
+    background-color: white;
+}
+.panelHeader {
+  margin-bottom: 1.67rem;
+}
+
+.testFormCard {
+    display: flex;
+}
+.testFormTitle {
+    font-size: 1.267rem;
+    font-weight: 670;
+}
+.formGroup {
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.formLabel {
+    font-size: 0.867rem;
+    font-weight: 600;
+    color: #19326c;
+}
+.textInput {
+    padding: 0.6rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+.ratingStars {
+    display: flex;
+    gap: 0.25rem;
+}
+.starButton {
+    background: none;
+    border: none;
+    font-size: 1.67rem;
+    cursor: pointer;
+    color: #c0cad8;
+}
+.starActive {
+    color: #f59e0b;
+}
+.choiceGroup {
+    flex-direction: column;
+}
+
+.choiceLabel {
+    align-items: center;
+}
