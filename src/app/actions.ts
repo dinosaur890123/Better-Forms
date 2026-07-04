@@ -2,6 +2,13 @@
 import prisma from "../lib/db";
 import {Form, FormField} from "../types/form";
 
+type DbFormWithFields = {
+    id: string;
+    title: string;
+    responses: number;
+    fields: {id: string; label: string; type: string; options: string[]}[];
+}
+
 export async function getForms(): Promise<Form[]> {
     try {
         const dbForms = await prisma.form.findMany({
