@@ -1,0 +1,20 @@
+.title {
+    font-size: 1.67rem;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(267px, 1fr));
+}
+.card {
+    background-color: white;
+    border: 1px solid #c6dcf7;
+    border-radius: 10px;
+    padding: 1.67rem;
+    cursor: pointer;
+}
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.67rem;
+}

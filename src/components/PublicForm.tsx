@@ -69,12 +69,12 @@ export default function PublicForm({form}: {form: Form}) {
 
                         {field.type === "choice" && (
                             <div className={styles.choiceGroup}>
-                                {field.options?.map((option, optIdx) => {
+                                {field.options?.map((option, optIdx) => (
                                     <label key={optIdx} className={styles.choiceLabel}>
                                         <input type="radio" name={`choice-${field.id}`} value={option} checked={responses[field.id] === option} onChange={() => setValue(field.id, option)} className={styles.radioInput}/>
                                         <span>{option}</span>
                                     </label>
-                                })}
+                                ))}
                             </div>
                         )}
 
