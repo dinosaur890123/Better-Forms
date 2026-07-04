@@ -149,7 +149,7 @@ export async function getPublicForm(id: string): Promise<Form | null> {
             id: f.id, 
             title: f.title, 
             responses: f.responses, 
-            fields: f.fields.map((fd) => ({
+            fields: f.fields.map((fd: DbField) => ({
                 id: fd.id,
                 label: fd.label,
                 type: fd.type as FormField["type"],
