@@ -20,7 +20,7 @@ export async function getForms(): Promise<Form[]> {
             }
         });
 
-        return dbForms.map((f) => ({
+        return dbForms.map((f: DbFormWithFields) => ({
             id: f.id,
             title: f.title,
             responses: f.responses,
