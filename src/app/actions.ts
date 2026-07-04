@@ -9,6 +9,12 @@ type DbFormWithFields = {
     fields: {id: string; label: string; type: string; options: string[]}[];
 }
 
+type DbField = {
+    id: string;
+    label: string;
+    type: string;
+    options: string[];
+}
 export async function getForms(): Promise<Form[]> {
     try {
         const dbForms = await prisma.form.findMany({
@@ -59,7 +65,7 @@ export async function createForm(title: string): Promise<Form | null> {
             id: newForm.id,
             title: newForm.title,
             responses: newForm.responses,
-            fields: newForm.fields.map((fd) => ({
+            fields: newForm.fields.map((fd: DbField) => ({
                 id: fd.id,
                 label: fd.label,
                 type: fd.type as FormField["type"],
