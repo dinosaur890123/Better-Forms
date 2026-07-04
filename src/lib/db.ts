@@ -7,7 +7,6 @@ const prismaClientSingleton = () => {
 
     if (!connectionString) {
         console.warn("Database url not set :(");
-        return new PrismaClient()
     }
 
     const pool = new Pool({connectionString});
