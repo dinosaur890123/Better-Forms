@@ -15,6 +15,12 @@ type DbField = {
     type: string;
     options: string[];
 }
+
+type DbSubmission = {
+    id: string;
+    answers: unknown;
+    submittedAt: Date;
+}
 export async function getForms(): Promise<Form[]> {
     try {
         const dbForms = await prisma.form.findMany({
@@ -170,7 +176,7 @@ export async function getFormSubmissions(
             where: {formId}, orderBy: {submittedAt: "desc"}
         });
 
-        return submissions.map((s) => ({
+        return submissions.map((s:DbSubmission) => ({
             id: s.id,
             answers: (s.answers as Record<string, any>) ?? {},
             submittedAt: s.submittedAt
