@@ -56,3 +56,13 @@ export type FormField = Prisma.FormFieldModel
  * 
  */
 export type Submission = Prisma.SubmissionModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel

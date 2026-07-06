@@ -11,4 +11,6 @@
 export type * from './models/Form'
 export type * from './models/FormField'
 export type * from './models/Submission'
+export type * from './models/User'
+export type * from './models/Session'
 export type * from './commonInputTypes'
