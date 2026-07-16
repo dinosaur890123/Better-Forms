@@ -6,7 +6,10 @@
 }
 
 .logo {
-    
+    font-size: 1.67rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 0.367rem;
 }
 .card {
     width: 100%;
