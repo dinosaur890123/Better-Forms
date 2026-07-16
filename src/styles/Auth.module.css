@@ -1,0 +1,37 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    
+}
+.card {
+    width: 100%;
+    max-width: 467px;
+    background-color: #142850;
+    border-radius: 14px;
+}
+.subtitle {
+    font-size: 0.867rem;
+    color: #a9b8d4;
+}
+
+.form {
+    flex-direction: column;
+}
+.label {
+    display: block;
+    font-size: 0.767rem;
+    font-weight: 670;
+    color: #7f9acb;
+}
+
+.input {
+    width: 100%;
+    background-color: #0f2043;
+    border: 1px solid #2d4d8b;
+}
+.input 
