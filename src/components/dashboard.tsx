@@ -1,6 +1,6 @@
 import React from "react";
 import {Form} from "../types/form";
-import styles from "../styles/Dashboard.module.css";
+import styles from "../styles/dashboard.module.css";
 interface DashboardProps {
   forms: Form[];
   onSelectForm: (id: string) => void;
