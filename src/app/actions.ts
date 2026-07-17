@@ -1,6 +1,7 @@
 "use server";
 import prisma from "../lib/db";
 import {Form, FormField} from "../types/form";
+import {getCurrentUser} from "../lib/auth";
 
 type DbFormWithFields = {
     id: string;
@@ -23,6 +24,8 @@ type DbSubmission = {
 }
 export async function getForms(): Promise<Form[]> {
     try {
+        const user = await getCurrentUser();
+        if (!user) return;
         const dbForms = await prisma.form.findMany({
             orderBy: {createdAt: "desc"},
             include: {
@@ -48,6 +51,8 @@ export async function getForms(): Promise<Form[]> {
 
 export async function createForm(title: string): Promise<Form | null> {
     try {
+        const user = await getCurrentUser();
+        if (!user) return null;
         const newForm = await prisma.form.create({
             data: {
                 title,
@@ -86,6 +91,8 @@ export async function createForm(title: string): Promise<Form | null> {
 
 export async function deleteForm(id: string): Promise<boolean> {
     try {
+        const user = await getCurrentUser();
+        if (!user) return false;
         await prisma.form.delete({
             where: {id}
         });
@@ -98,6 +105,10 @@ export async function deleteForm(id: string): Promise<boolean> {
 
 export async function saveFormFields(formId: string, fields: FormField[]): Promise<boolean> {
     try {
+        const user = await getCurrentUser();
+        if (!user) return false;
+        const owned = await prisma.form.findFirst({where: {id: formId, userId: user.id}});
+        if (!owned) return false;
         await prisma.$transaction([
             prisma.formField.deleteMany({where: {formId}}),
             prisma.formField.createMany({
@@ -172,6 +183,10 @@ export async function getFormSubmissions(
     formId:string
 ): Promise<{id: string; answers: Record<string, any>; submittedAt: Date}[]> {
     try {
+        const user = await getCurrentUser();
+        if (!user) return [];
+        const owned = await prisma.form.findFirst({where: {id: formId, userId: user.id}});
+        if (!owned) return [];
         const submissions = await prisma.submission.findMany({
             where: {formId}, orderBy: {submittedAt: "desc"}
         });
@@ -185,4 +200,10 @@ export async function getFormSubmissions(
         console.error("Failed to fetch form submissions:", error);
         return [];
     }
-} 
+}
+
+export async function getSessionUser(): Promise<{id: string; email: string} | null> {
+    const user = await getCurrentUser();
+    if (!user) return null;
+    return {id: user.id, email: user.email};
+}
