@@ -37,4 +37,42 @@
     background-color: #0f2043;
     border: 1px solid #2d4d8b;
 }
-.input 
+.input:focus {
+    outline: none;
+    border-color: #4667ea;
+}
+
+.button {
+    margin-top: 0.67rem;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #4262de;
+}
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.67;
+}
+
+.error {
+    background-color: #3b1620;
+    color: #ffb3c0;
+    border-radius: 8px;
+    font-size: 0.867rem;
+}
+
+.footer {
+    text-align: center;
+}
+
+.link {
+    color: #6d8bff;
+    text-decoration: none;
+    font-weight: 670;
+}
+.link:hover {
+    text-decoration: underline;
+}
