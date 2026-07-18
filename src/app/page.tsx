@@ -1,4 +1,6 @@
 "use client";
+import {useRouter} from "next/navigation";
+import {signOut} from "./auth/actions";
 import {useState, useEffect} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -7,10 +9,12 @@ import Dashboard from "../components/dashboard";
 import CreateFormModal from "../components/createFormModal";
 import FormBuilder from "../components/formBuilder";
 import FormPreview from "../components/formPreview";
-import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse} from "./actions";
+import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser} from "./actions";
 
 
 export default function Home() {
+  const router = useRouter();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [forms, setForms] = useState<Form[]>([]);
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -21,14 +25,20 @@ export default function Home() {
   const activeForm = forms.find((f) => f.id === selectedFormId);
 
   useEffect(() => {
-    async function loadForms() {
+    async function load() {
       setIsLoading(true);
+      const sessionUser = await getSessionUser();
+      if (!sessionUser) {
+        router.replace("/welcome");
+        return;
+      }
+      setUserEmail(sessionUser.email);
       const dbForms = await getForms();
       setForms(dbForms);
       setIsLoading(false);
     }
-    loadForms();
-  }, []);
+    load();
+  }, [router]);
 
   const handleCreateForm = async (title: string) => {
     const newForm = await createForm(title);
@@ -137,6 +147,10 @@ export default function Home() {
     )
   };
 
+  const handleLogout = async () => {
+    await signOut();
+    router.replace("/welcome");
+  };
   const handleTestValueChange = (fieldId: string, value: any) => {
     setTestResponses({
       ...testResponses,
@@ -189,7 +203,14 @@ export default function Home() {
             )}
             <button className="button button-secondary" onClick={handleSaveFields} disabled={isSaving}>{isSaving ? "Saving..." : "Save Changes"}</button>
             <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
+            {userEmail && (
+            <>
+              <span style={{fontSize: "0.767rem", color: "#4b6a94"}}>{userEmail}</span>
+              <button className="button button-secondary" onClick={handleLogout}>Logout</button>
+            </>
+          )}
           </div>
+          
         )
         }
       </header>
