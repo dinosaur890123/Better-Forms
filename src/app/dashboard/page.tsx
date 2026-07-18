@@ -1,15 +1,15 @@
 "use client";
 import {useRouter} from "next/navigation";
-import {signOut} from "./auth/actions";
+import {signOut} from "../auth/actions";
 import {useState, useEffect} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-import {Form, FormField} from "../types/form";
-import Dashboard from "../components/dashboard";
-import CreateFormModal from "../components/createFormModal";
-import FormBuilder from "../components/formBuilder";
-import FormPreview from "../components/formPreview";
-import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser} from "./actions";
+import {Form, FormField} from "../../types/form";
+import Dashboard from "../../components/dashboard";
+import CreateFormModal from "../../components/createFormModal";
+import FormBuilder from "../../components/formBuilder";
+import FormPreview from "../../components/formPreview";
+import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser} from "../actions";
 
 
 export default function Home() {
