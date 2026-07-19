@@ -43,7 +43,7 @@ export default function PublicForm({form}: {form: Form}) {
         return (
             <div className={page.card}>
                 <h1 className={styles.testFormTitle}>{form.title}</h1>
-                <p style={{marginTop: "0.67rem", color: "#596e8a"}}>This form isn't accepting responses.</p>
+                <p style={{marginTop: "0.67rem", color: "#596e8a"}}>This form isn't accepting responses. Contact the form owner if you need help with this.</p>
             </div>
         )
     }
