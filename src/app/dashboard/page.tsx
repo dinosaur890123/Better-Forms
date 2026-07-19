@@ -9,7 +9,7 @@ import Dashboard from "../../components/dashboard";
 import CreateFormModal from "../../components/createFormModal";
 import FormBuilder from "../../components/formBuilder";
 import FormPreview from "../../components/formPreview";
-import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser} from "../actions";
+import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser, updateFormSettings} from "../actions";
 
 
 export default function Home() {
@@ -165,6 +165,13 @@ export default function Home() {
     });
   }
 
+  const handleToggleAccepting = async () => {
+    if (!activeForm) return;
+    const next = !activeForm.isAccepting;
+    setForms(forms.map((f) => f.id === activeForm.id ? {...f, isAccepting: next} : f));
+    await updateFormSettings(activeForm.id, next);
+  }
+
   
   const testSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,6 +209,7 @@ export default function Home() {
               </button>
             )}
             <button className="button button-secondary" onClick={handleSaveFields} disabled={isSaving}>{isSaving ? "Saving..." : "Save Changes"}</button>
+            <button className="button button-secondary" onClick={handleToggleAccepting} disabled={isSaving}>{activeForm.isAccepting ? "Accepting: On":"Accepting: Off"}</button>
             <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
             {userEmail && (
             <>

@@ -8,5 +8,6 @@ export interface Form {
   id: string;
   title: string;
   responses: number;
+  isAccepting: boolean;
   fields: FormField[];
 }

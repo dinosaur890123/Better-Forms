@@ -8,6 +8,7 @@ type DbFormWithFields = {
     title: string;
     responses: number;
     fields: {id: string; label: string; type: string; options: string[]}[];
+    isAccepting: boolean;
 }
 
 type DbField = {
@@ -39,6 +40,7 @@ export async function getForms(): Promise<Form[]> {
             id: f.id,
             title: f.title,
             responses: f.responses,
+            isAccepting: f.isAccepting,
             fields: f.fields.map((fd) => ({
                 id: fd.id, label: fd.label, type: fd.type as FormField["type"], options: fd.options
             }))
@@ -76,6 +78,7 @@ export async function createForm(title: string): Promise<Form | null> {
             id: newForm.id,
             title: newForm.title,
             responses: newForm.responses,
+            isAccepting: newForm.isAccepting,
             fields: newForm.fields.map((fd: DbField) => ({
                 id: fd.id,
                 label: fd.label,
@@ -130,6 +133,8 @@ export async function saveFormFields(formId: string, fields: FormField[]): Promi
 }
 export async function submitFormResponse(formId: string, answers: Record<string, any>): Promise<boolean> {
     try {
+        const form = await prisma.form.findUnique({where: {id: formId}});
+        if (!form || !form.isAccepting) return false;
         await prisma.$transaction([
             prisma.submission.create({
                 data: {
@@ -165,7 +170,8 @@ export async function getPublicForm(id: string): Promise<Form | null> {
         return {
             id: f.id, 
             title: f.title, 
-            responses: f.responses, 
+            responses: f.responses,
+            isAccepting: f.isAccepting,
             fields: f.fields.map((fd: DbField) => ({
                 id: fd.id,
                 label: fd.label,
@@ -201,9 +207,38 @@ export async function getFormSubmissions(
         return [];
     }
 }
+export async function getOwnedForm(id: string): Promise<Form | null> {
+    try {
+        const user = await getCurrentUser();
+        if (!user) return null;
+        const f = await prisma.form.findFirst({
+            where: {id, userId: user.id}, include: {fields: {orderBy: {order: "asc"}}}
+        });
 
+        if (!f) return null;
+        return {
+            id: f.id, title: f.title, responses: f.responses, isAccepting: f.isAccepting, fields: f.fields.map((fd: DbField) => {
+                id: fd.id, label: fd.label, type: fd.type as FormField["type"], options: fd.options
+            })
+        }
+    } catch (error) {
+        console.error("Failed to fetch owned form:", error);
+        return null;
+    }
+}
 export async function getSessionUser(): Promise<{id: string; email: string} | null> {
     const user = await getCurrentUser();
     if (!user) return null;
     return {id: user.id, email: user.email};
+}
+
+export async function updateFormSettings(formId: string, isAccepting: boolean): Promise<boolean> {
+    try {
+        const user = await getCurrentUser();
+        if (!user) return false;
+        const result = await prisma.form.updateMany({
+            where: {id: formId, userId: user.id}, data: {isAccepting}
+        });
+        return result.count > 0;
+    }
 }

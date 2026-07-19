@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import {getPublicForm, getFormSubmissions} from "../../../actions";
+import {getOwnedForm, getFormSubmissions} from "../../../actions";
 import styles from "../../../../styles/PublicPage.module.css";
 export const dynamic = "force-dynamic";
 
@@ -17,7 +17,7 @@ export default async function ResponsesPage({
     params: Promise<{id: string}>;
 }) {
     const {id} = await params;
-    const form = await getPublicForm(id);
+    const form = await getOwnedForm(id);
     if (!form) notFound();
     const submissions = await getFormSubmissions(id);
 

@@ -16,6 +16,7 @@ model Form {
     user        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
     fields      FormField[]
     submissions Submission[]
+    isAccepting Boolean       @default(true)
 }
 
 model FormField {
