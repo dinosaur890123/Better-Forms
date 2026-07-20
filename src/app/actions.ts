@@ -217,9 +217,9 @@ export async function getOwnedForm(id: string): Promise<Form | null> {
 
         if (!f) return null;
         return {
-            id: f.id, title: f.title, responses: f.responses, isAccepting: f.isAccepting, fields: f.fields.map((fd: DbField) => {
+            id: f.id, title: f.title, responses: f.responses, isAccepting: f.isAccepting, fields: f.fields.map((fd: DbField) => ({
                 id: fd.id, label: fd.label, type: fd.type as FormField["type"], options: fd.options
-            })
+            }))
         }
     } catch (error) {
         console.error("Failed to fetch owned form:", error);

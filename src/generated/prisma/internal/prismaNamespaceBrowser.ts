@@ -80,7 +80,8 @@ export const FormScalarFieldEnum = {
   responses: 'responses',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  isAccepting: 'isAccepting'
 } as const
 
 export type FormScalarFieldEnum = (typeof FormScalarFieldEnum)[keyof typeof FormScalarFieldEnum]
