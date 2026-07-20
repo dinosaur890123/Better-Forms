@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     z-index: 3;
+    inset: 0;
 }
 
 .modal {
@@ -10,4 +11,17 @@
     border-radius: 12.67px;
     width: 100%;
     max-width: 467px;
+}
+.title {
+    color: #1b2b50;
+    font-weight: 670;
+}
+
+.message {
+    color: #64748b;
+    line-height: 1.67;
+}
+.actions {
+    justify-content: flex-end;
+    gap: 0.67rem;
 }
