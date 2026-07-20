@@ -209,7 +209,7 @@ export default function Home() {
               </button>
             )}
             <button className="button button-secondary" onClick={handleSaveFields} disabled={isSaving}>{isSaving ? "Saving..." : "Save Changes"}</button>
-            <button className="button button-secondary" onClick={handleToggleAccepting} disabled={isSaving}>{activeForm.isAccepting ? "Accepting: On":"Accepting: Off"}</button>
+            <button className="button button-secondary" onClick={handleToggleAccepting} disabled={isSaving}>{activeForm?.isAccepting ? "Accepting: On":"Accepting: Off"}</button>
             <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
             {userEmail && (
             <>

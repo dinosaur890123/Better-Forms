@@ -26,7 +26,7 @@ type DbSubmission = {
 export async function getForms(): Promise<Form[]> {
     try {
         const user = await getCurrentUser();
-        if (!user) return;
+        if (!user) return [];
         const dbForms = await prisma.form.findMany({
             orderBy: {createdAt: "desc"},
             include: {
@@ -240,5 +240,8 @@ export async function updateFormSettings(formId: string, isAccepting: boolean): 
             where: {id: formId, userId: user.id}, data: {isAccepting}
         });
         return result.count > 0;
+    } catch (error) {
+        console.error("Failed to update form settings:", error);
+        return false;
     }
 }
