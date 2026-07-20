@@ -1,0 +1,13 @@
+.overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 12.67px;
+    width: 100%;
+    max-width: 467px;
+}
