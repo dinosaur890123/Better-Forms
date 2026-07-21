@@ -10,6 +10,7 @@ import CreateFormModal from "../../components/createFormModal";
 import FormBuilder from "../../components/formBuilder";
 import FormPreview from "../../components/formPreview";
 import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser, updateFormSettings} from "../actions";
+import ConfirmModal from "../../components/ConfirmModal";
 
 
 export default function Home() {
@@ -21,6 +22,8 @@ export default function Home() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [testResponses, setTestResponses] = useState<Record<string, any>>({});
+  const [formToDelete, setFormToDelete] = useState<{id: string; title: string} | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const activeForm = forms.find((f) => f.id === selectedFormId);
 
@@ -51,16 +54,23 @@ export default function Home() {
     }
     setShowCreateModal(false);
   };
- const handleDeleteForm = async (e: React.MouseEvent, id: string) => {
+  const requestDeleteForm = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    const success = await deleteForm(id);
-    if (success) {
-      setForms(forms.filter((f) => f.id !== id));
-      if (selectedFormId === id) setSelectedFormId(null);
-    } else {
-        alert("Failed to delete the form from the database");
-    }
+    const form = forms.find((f) => f.id === id);
+
+    if (form) setFormToDelete({id: form.id, title: form.title});
   };
+
+  const confirmDeleteForm = async () => {
+    if (!formToDelete) return;
+    const success = await deleteForm(formToDelete.id);
+    if (success) {
+      setForms(forms.filter((f) => f.id !== formToDelete.id));
+      if (selectedFormId === formToDelete.id) setSelectedFormId(null);
+    }
+    setFormToDelete(null);
+  };
+  
 
   const addField = (type: "text" | "checkbox" | "choice" | "rating" | "email") => {
     if (!activeForm) return;
@@ -68,7 +78,7 @@ export default function Home() {
       id: Date.now().toString(), label: type === "text" ? "New text question" : type === "email" ? "New email question" : type === "rating" ? "Rate your experience"
           : type === "choice"
           ? "Select an option"
-          : "New Checkbox option", type, ...(type === "choice" ? { options: ["Option 1", "Option 2"] } : {})
+          : "New Checkbox option", type, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
     };
 
     setForms(
@@ -226,7 +236,7 @@ export default function Home() {
       <main className={styles.main}>
         
         {selectedFormId === null ? (
-          <Dashboard forms={forms} onSelectForm={setSelectedFormId} onDeleteForm={handleDeleteForm}/>
+          <Dashboard forms={forms} onSelectForm={setSelectedFormId} onDeleteForm={requestDeleteForm}/>
         ):(
           activeForm && (
             <div className={styles.workspace}>
@@ -255,6 +265,14 @@ export default function Home() {
         onClose={() => setShowCreateModal(false)}
         onCreate={handleCreateForm}
       />
+
+      <ConfirmModal 
+        isOpen={formToDelete !== null}
+        title="Delete form?"
+        message={`This will forever delete your form, and is permanent.`}
+        onConfirm={confirmDeleteForm}
+        onCancel={() => setFormToDelete(null)}
+        loading={deleting}
     </div>
   );
 }
