@@ -25,3 +25,29 @@
     justify-content: flex-end;
     gap: 0.67rem;
 }
+
+.cancel {
+    border-radius: 6px;
+    color: #344359;
+    font-weight: 567;
+    cursor: pointer;
+    border-radius: 6.7px;
+}
+.cancel:hover {
+    background-color: #acc3da;
+}
+
+.confirm {
+    border-radius: 6.7px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.867rem;
+}
+.confirm:hover {
+    background-color: #b91c1c;
+}
+
+.confirm:disabled, .cancel:disabled {
+    cursor: not-allowed;
+}
