@@ -269,7 +269,7 @@ export default function Home() {
       <ConfirmModal 
         isOpen={formToDelete !== null}
         title="Delete form?"
-        message={`This will forever delete your form, and is permanent.`}
+        message={`This will forever delete your "${formToDelete?.title}", and is permanent. `}
         onConfirm={confirmDeleteForm}
         onCancel={() => setFormToDelete(null)}
         loading={deleting}
