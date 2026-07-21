@@ -273,6 +273,7 @@ export default function Home() {
         onConfirm={confirmDeleteForm}
         onCancel={() => setFormToDelete(null)}
         loading={deleting}
+        />
     </div>
   );
 }
