@@ -48,7 +48,7 @@ function FieldAnalytics({field, values, total}: {field: FormField; values: any[]
         return (
             <>
                 <Bar label="Checked" count={yes} total={total}/>
-                <Bar label="Unchecked" count={total} total={total} />
+                <Bar label="Unchecked" count={total-yes} total={total} />
             </>
         )
     }
