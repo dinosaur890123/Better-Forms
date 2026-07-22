@@ -12,6 +12,16 @@
     text-decoration: underline;
 }
 
+.stat {
+    font-size: 2rem;
+    color: #413bb9;
+    font-weight: 670;
+}
+
+.statUnit {
+    font-weight: 567;
+    color: #7c90ad;
+}
 .pageTitle {
     font-weight: 767;
     color: #131e37;
@@ -24,5 +34,15 @@
 }
 .empty {
     text-align: center;
-  color: #64748b;
+    color: #64748b;
+    background: white;
+}
+
+.grid {
+    display: grid;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
 }
