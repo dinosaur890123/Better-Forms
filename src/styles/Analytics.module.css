@@ -1,0 +1,28 @@
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.backLink {
+    color: #4f46e5;
+    font-weight: 670;
+
+}
+.backLink:hover {
+    text-decoration: underline;
+}
+
+.pageTitle {
+    font-weight: 767;
+    color: #131e37;
+}
+
+.subtitle {
+    font-size: 0.967rem;
+    color: #64748b;
+    margin-bottom: 1.67rem;
+}
+.empty {
+    text-align: center;
+  color: #64748b;
+}
