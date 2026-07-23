@@ -6,6 +6,10 @@
 .backLink {
     color: #4f46e5;
     font-weight: 670;
+    font-size: 0.867rem;
+    display: inline-block;
+    text-decoration: none;
+    margin-bottom: 1.67rem;
 
 }
 .backLink:hover {
@@ -36,6 +40,9 @@
     text-align: center;
     color: #64748b;
     background: white;
+    padding: 3rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
 }
 
 .grid {
@@ -45,15 +52,20 @@
 .card {
     background: white;
     border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 1.67rem;
 }
 .cardHeader {
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1rem;
+    display: flex;
 }
 
 .fieldLabel {
-    font-weight: 600;
+    font-weight: 670;
     color: #0f173a;
+    font-size: 1rem;
 }
 
 .badge {
@@ -61,6 +73,7 @@
     font-weight: 670;
     color: #4f46e5;
     border-radius: 670px;
+    padding: 0.3rem 0.67rem;
 }
 
 .barRow {
