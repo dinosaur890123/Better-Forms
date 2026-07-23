@@ -44,5 +44,47 @@
 
 .card {
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
+}
+.cardHeader {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fieldLabel {
+    font-weight: 600;
+    color: #0f173a;
+}
+
+.badge {
+    font-size: 0.67rem;
+    font-weight: 670;
+    color: #4f46e5;
+    border-radius: 670px;
+}
+
+.barRow {
+    align-items: center;
+    margin-bottom: 0.67rem;
+}
+
+.barLabel {
+    height: 10px;
+    border-radius: 670px;
+    overflow: hidden;
+}
+.barFill {
+    border-radius: 670px;
+    height: 100%;
+    background: linear-gradient(90deg, #4b79d6, #3538e0);
+}
+.barValue {
+    color: #64748b;
+    text-align: right;
+    width: 67px;
+}
+
+.textSummary {
+    font-size: 0.867rem;
+    color: #455770;
 }
