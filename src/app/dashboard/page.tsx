@@ -214,6 +214,10 @@ export default function Home() {
               </Link>
             )}
             {selectedFormId && (
+                <Link href={`/forms/${selectedFormId}/analytics`} className="button button-secondary">Analytics
+                </Link>
+              )}
+            {selectedFormId && (
               <button className="button button-secondary" onClick={() => handleShareLink(selectedFormId)} disabled={isSaving}>
                 Share
               </button>
