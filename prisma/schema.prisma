@@ -16,7 +16,7 @@ model Form {
     user        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
     fields      FormField[]
     submissions Submission[]
-    isAccepting Boolean       @default(true)
+    isAccepting Boolean       @default(tarue)
 }
 
 model FormField {
@@ -35,6 +35,7 @@ model Submission {
     form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
     answers     Json
     submittedAt DateTime @default(now())
+    durationMs  Int?
 }
 
 model User {

@@ -22,6 +22,7 @@ type DbSubmission = {
     id: string;
     answers: unknown;
     submittedAt: Date;
+    durationMs: number | null;
 }
 export async function getForms(): Promise<Form[]> {
     try {
@@ -131,19 +132,18 @@ export async function saveFormFields(formId: string, fields: FormField[]): Promi
         return false;
     }
 }
-export async function submitFormResponse(formId: string, answers: Record<string, any>): Promise<boolean> {
+export async function submitFormResponse(formId: string, answers: Record<string, any>, durationMs?: number): Promise<boolean>  {
     try {
         const form = await prisma.form.findUnique({where: {id: formId}});
         if (!form || !form.isAccepting) return false;
         await prisma.$transaction([
             prisma.submission.create({
-                data: {
-                    formId, answers: answers as any
-                }
+                data: {formId, answers: answers as any, durationMs: durationMs ?? null}
             }),
             prisma.form.update({
                 where: {id: formId},
                 data: {
+                    where: {id: formId},
                     responses: {increment: 1}
                 }
             })
@@ -186,8 +186,8 @@ export async function getPublicForm(id: string): Promise<Form | null> {
 }
 
 export async function getFormSubmissions(
-    formId:string
-): Promise<{id: string; answers: Record<string, any>; submittedAt: Date}[]> {
+    formId: string
+): Promise<{id: string; answers: Record<string, any>; submittedAt: Date; durationMs: number | null}[]> {
     try {
         const user = await getCurrentUser();
         if (!user) return [];
@@ -201,6 +201,7 @@ export async function getFormSubmissions(
             id: s.id,
             answers: (s.answers as Record<string, any>) ?? {},
             submittedAt: s.submittedAt
+            durationMs: s.durationMs ?? null
         }))
     } catch (error) {
         console.error("Failed to fetch form submissions:", error);

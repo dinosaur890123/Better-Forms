@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {Form} from "../types/form";
 import {submitFormResponse} from "../app/actions";
 import styles from "../styles/FormPreview.module.css";
@@ -10,6 +10,7 @@ export default function PublicForm({form}: {form: Form}) {
     const [submitting, setSubmitting] = useState(false);
     const [done, setDone] = useState(false);
     const [error, setError] = useState(false);
+    const startTimeRef = useRef<number>(Date.now());
 
     const setValue = (fieldId: string, value: any) => {
         setResponses({...responses, [fieldId]: value});
@@ -19,7 +20,8 @@ export default function PublicForm({form}: {form: Form}) {
         e.preventDefault();
         setSubmitting(true);
         setError(false);
-        const success = await submitFormResponse(form.id, responses);
+        const durationMs = Date.now() - startTimeRef.current;
+        const success = await submitFormResponse(form.id, responses, durationMs);
         setSubmitting(false);
         if (success) {
             setDone(true);

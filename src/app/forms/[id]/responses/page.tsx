@@ -2,6 +2,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import {getOwnedForm, getFormSubmissions} from "../../../actions";
 import styles from "../../../../styles/PublicPage.module.css";
+import {formatDuration} from "../../../../lib/time";
 export const dynamic = "force-dynamic";
 
 function formatAnswer(value: any): string {
@@ -42,6 +43,7 @@ export default async function ResponsesPage({
                         <thead>
                             <tr>
                                 <th>Submitted</th>
+                                <th>Time spent</th>
                                 {form.fields.map((field) => (
                                     <th key={field.id}>{field.label}</th>
                                 ))}
@@ -52,6 +54,7 @@ export default async function ResponsesPage({
                             {submissions.map((s) => (
                                 <tr key={s.id}>
                                     <td>{s.submittedAt.toLocaleString()}</td>
+                                    <td>{formatDuration(s.durationMs)}</td>
                                     {form.fields.map((field) => (
                                         <td key={field.id}>{formatAnswer(s.answers[field.id])}</td>
                                     ))}

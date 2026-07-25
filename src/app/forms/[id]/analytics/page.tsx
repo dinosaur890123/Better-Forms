@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {getOwnedForm, getFormSubmissions} from "../../../actions";
 import {FormField} from "../../../../types/form";
-import styles from "../../../../styles/Analytics.module.css"; // reminder to self
+import styles from "../../../../styles/Analytics.module.css";
+import {formatDuration} from "../../../../lib/time";
 
 function Bar({label, count, total}: {label: string; count: number; total: number}) {
     const percent = total > 0 ? Math.round((count/total) * 100) : 0;
@@ -63,6 +64,9 @@ export default async function AnalyticsPage({params}: {params: Promise<{id: stri
     const submissions = await getFormSubmissions(id);
     const total = submissions.length;
 
+    const timed = submissions.map((s) => s.durationMs).filter((d): d is number => typeof d === "number");
+      const avgDuration = timed.length ? Math.round(timed.reduce((a, b) => a+b, 0)/timed.length): null;
+
     return (
         <div className={styles.page}>
             <Link href="/dashboard" className={styles.backLink}>Back to forms</Link>
@@ -72,6 +76,15 @@ export default async function AnalyticsPage({params}: {params: Promise<{id: stri
             {total === 0 ? (
                 <div className={styles.empty}>There aren't responses yet, analytics will show once more people submit a response.</div>
             ):(
+                <>
+                {avgDuration !== null && (
+                    <div className={styles.card} style={{marginBottom: "1.67rem"}}>
+                        <div className={styles.cardHeader}>
+                            <h3 className={styles.fieldLabel}>Average time to complete</h3>
+                        </div>
+                        <div className={styles.stat}>{formatDuration(avgDuration)} <span className={styles.statUnit}>average</span></div>
+                    </div>
+                )}
                 <div className={styles.grid}>
                     {form.fields.map((field) => {
                         const values = submissions.map((s) => s.answers[field.id]).filter((v) => v !== undefined && v !== null && v !== "");
@@ -87,6 +100,7 @@ export default async function AnalyticsPage({params}: {params: Promise<{id: stri
                         );
                     })}
                 </div>
+                </>
             )}
         </div>
     );
