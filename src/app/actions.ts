@@ -29,6 +29,7 @@ export async function getForms(): Promise<Form[]> {
         const user = await getCurrentUser();
         if (!user) return [];
         const dbForms = await prisma.form.findMany({
+            where: {userId: user.id},
             orderBy: {createdAt: "desc"},
             include: {
                 fields: {
@@ -59,6 +60,7 @@ export async function createForm(title: string): Promise<Form | null> {
         const newForm = await prisma.form.create({
             data: {
                 title,
+                userId: user.id,
                 fields: {
                     create: [
                         {
@@ -98,7 +100,7 @@ export async function deleteForm(id: string): Promise<boolean> {
         const user = await getCurrentUser();
         if (!user) return false;
         await prisma.form.delete({
-            where: {id}
+            where: {id, userId: user.id}
         });
         return true;
     } catch (error) {
@@ -143,7 +145,6 @@ export async function submitFormResponse(formId: string, answers: Record<string,
             prisma.form.update({
                 where: {id: formId},
                 data: {
-                    where: {id: formId},
                     responses: {increment: 1}
                 }
             })
@@ -200,7 +201,7 @@ export async function getFormSubmissions(
         return submissions.map((s:DbSubmission) => ({
             id: s.id,
             answers: (s.answers as Record<string, any>) ?? {},
-            submittedAt: s.submittedAt
+            submittedAt: s.submittedAt,
             durationMs: s.durationMs ?? null
         }))
     } catch (error) {

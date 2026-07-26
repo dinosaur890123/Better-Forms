@@ -103,7 +103,8 @@ export const SubmissionScalarFieldEnum = {
   id: 'id',
   formId: 'formId',
   answers: 'answers',
-  submittedAt: 'submittedAt'
+  submittedAt: 'submittedAt',
+  durationMs: 'durationMs'
 } as const
 
 export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
