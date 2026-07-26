@@ -4,7 +4,7 @@
 }
 
 .backLink {
-    color: #4f46e5;
+    color: var(--accent);
     font-weight: 670;
     font-size: 0.867rem;
     display: inline-block;
@@ -18,7 +18,7 @@
 
 .stat {
     font-size: 2rem;
-    color: #413bb9;
+    color: var(--accent);
     font-weight: 670;
 }
 
@@ -71,7 +71,7 @@
 .badge {
     font-size: 0.67rem;
     font-weight: 670;
-    color: #4f46e5;
+    color: var(--accent);
     border-radius: 670px;
     padding: 0.3rem 0.67rem;
     text-transform: capitalize;
@@ -95,7 +95,7 @@
 .barFill {
     border-radius: 670px;
     height: 100%;
-    background: linear-gradient(90deg, #4b79d6, #3538e0);
+    background: var(--accent);
 }
 .barValue {
     color: #64748b;

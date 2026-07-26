@@ -73,15 +73,28 @@ body {
   color: var(--text);
   border-color: var(--border-strong);
 }
-
 .button-secondary:hover:not(:disabled) {
   background-color: var(--surface-2);
   border-color: var(--text-subtle);
 }
-
 .button-danger {
   background-color: var(--surface);
   color: var(--danger);
   border-color: var(--border-strong);
 }
 
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.badge {
+  align-items: center;
+  font-size: 0.67rem;
+  font-weight: 567;
+  border-radius: 670px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}

@@ -1,7 +1,7 @@
 "use client";
 import {useRouter} from "next/navigation";
 import {signOut} from "../auth/actions";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import {Form, FormField} from "../../types/form";
@@ -24,6 +24,9 @@ export default function Home() {
   const [testResponses, setTestResponses] = useState<Record<string, any>>({});
   const [formToDelete, setFormToDelete] = useState<{id: string; title: string} | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const lastSavedRef = useRef<string>("");
+  const autosaveTimer = useRef<ReturnType<typeof setTimeout>|null>(null);
 
   const activeForm = forms.find((f) => f.id === selectedFormId);
 
@@ -42,6 +45,29 @@ export default function Home() {
     }
     load();
   }, [router]);
+
+  useEffect(() => {
+    if (activeForm) lastSavedRef.current = JSON.stringify(activeForm.fields);
+    setSaveStatus("idle");
+  }, [selectedFormId]);
+
+  useEffect(() => {
+    if (!activeForm) return;
+    const signature = JSON.stringify(activeForm.fields);
+    if (signature === lastSavedRef.current) return;
+    
+    if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+    autosaveTimer.current = setTimeout(async () => {
+      setSaveStatus("saving");
+      const ok = await saveFormFields(activeForm.id, activeForm.fields);
+      if (ok) lastSavedRef.current = signature;
+      setSaveStatus(ok ? "saved" : "idle");
+    },1000);
+
+    return () => {
+      if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+    };
+  }, [activeForm, selectedFormId]);
 
   const handleCreateForm = async (title: string) => {
     const newForm = await createForm(title);
@@ -222,7 +248,9 @@ export default function Home() {
                 Share
               </button>
             )}
-            <button className="button button-secondary" onClick={handleSaveFields} disabled={isSaving}>{isSaving ? "Saving..." : "Save Changes"}</button>
+            <span style={{fontSize: "0.867rem", color: "var(--text-muted)", minWidth: "3.67rem"}}>
+                {saveStatus === "saving" ? "Saving…" : saveStatus === "saved" ? "Saved" : ""}
+              </span>
             <button className="button button-secondary" onClick={handleToggleAccepting} disabled={isSaving}>{activeForm?.isAccepting ? "Accepting: On":"Accepting: Off"}</button>
             <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
             {userEmail && (
