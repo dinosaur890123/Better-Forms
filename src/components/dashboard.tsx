@@ -5,6 +5,7 @@ interface DashboardProps {
   forms: Form[];
   onSelectForm: (id: string) => void;
   onDeleteForm: (e: React.MouseEvent, id: string) => void;
+  onShareForm: (e: React.MouseEvent, id: string) => void;
 }
 export default function Dashboard({ forms, onSelectForm, onDeleteForm }: DashboardProps) {
   return (
@@ -16,6 +17,7 @@ export default function Dashboard({ forms, onSelectForm, onDeleteForm }: Dashboa
             <div className={styles.cardHeader}>
               <h3>{form.title}</h3>
               <button className="button button-danger" onClick={(e) => onDeleteForm(e, form.id)}> Delete</button>
+              <button className="button button-secondary" onClick={(e) => onShareForm(e, form.id)}>Share</button>
             </div>
             <p>{form.responses} responses</p>
           </div>

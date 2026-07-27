@@ -176,12 +176,17 @@ export default function Home() {
     }
   }
   const handleShareLink = (id: string) => {
-    const url = `${window.location.origin}/form/${id}`;
+    const url = `${window.location.origin}/forms/${id}`;
     navigator.clipboard.writeText(url).then(
       () => alert(`Public link copied:\n${url}`),
       () => alert(`Share this link:\n${url}`)
     )
   };
+
+  const requestShareForm = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    handleShareLink(id);
+};
 
   const handleLogout = async () => {
     await signOut();
