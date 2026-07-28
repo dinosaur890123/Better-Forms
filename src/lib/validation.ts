@@ -6,3 +6,14 @@ export function isBlank(field: FormField, value: unknown): boolean {
 
     return value === undefined;
 }
+
+export function validateAnswer(field: FormField, value: unknown): string|null {
+    if (isBlank(field, value)) {
+        return field.required ? `${field.label} is required` : null;
+    }
+
+    switch (field.type) {
+        case "email":
+            if (typeof value !== "string" || !/^+@[^\s@]+\.[^\s@]+$/.test(value))
+    }
+}
