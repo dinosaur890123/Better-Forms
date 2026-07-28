@@ -14,6 +14,11 @@ export function validateAnswer(field: FormField, value: unknown): string|null {
 
     switch (field.type) {
         case "email":
-            if (typeof value !== "string" || !/^+@[^\s@]+\.[^\s@]+$/.test(value))
+            if (typeof value !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                return "Please enter only a valid email address";
+            }
+            break;
+        case "rating":
+            
     }
 }
