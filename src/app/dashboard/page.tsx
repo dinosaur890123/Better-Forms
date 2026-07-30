@@ -35,7 +35,7 @@ export default function Home() {
       setIsLoading(true);
       const sessionUser = await getSessionUser();
       if (!sessionUser) {
-        router.replace("/welcome");
+        router.replace("/");
         return;
       }
       setUserEmail(sessionUser.email);
@@ -202,7 +202,7 @@ export default function Home() {
 
   const handleLogout = async () => {
     await signOut();
-    router.replace("/welcome");
+    router.replace("/");
   };
   const handleTestValueChange = (fieldId: string, value: any) => {
     setTestResponses({
