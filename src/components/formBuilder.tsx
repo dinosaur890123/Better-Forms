@@ -7,13 +7,14 @@ interface FormBuilderProps {
     onAddField: (type: "text" | "checkbox" | "choice" | "rating" | "email") => void;
     onDeleteField: (fieldId: string) => void;
     onUpdateFieldLabel: (fieldId: string, label: string) => void;
+    onToggleRequired: (fieldId: string, required: boolean) => void;
     onAddChoiceOption: (fieldId: string) => void;
     onUpdateChoiceOption: (fieldId: string, optionIdx: number, value: string) => void;
     onDeleteChoiceOption: (fieldId: string, optionIdx: number) => void;
 }
 
 export default function FormBuilder({
-    form, onAddField, onDeleteField, onUpdateFieldLabel, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption
+    form, onAddField, onDeleteField, onUpdateFieldLabel, onToggleRequired, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption
 }: FormBuilderProps) {
     return (
         <div className={styles.editorPanel}>
@@ -30,6 +31,11 @@ export default function FormBuilder({
                         </div>
                         
                         <input type="text" className={styles.fieldInput} value={field.label} onChange={(e) => onUpdateFieldLabel(field.id, e.target.value)} placeholder="Enter question label here"/>
+
+                        <label style={{display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", marginTop: "0.4rem", color: "var(--text-muted)"}}>
+                            <input type="checkbox" checked={field.required} onChange={(e) => onToggleRequired(field.id, e.target.checked)}/>
+                            Required
+                        </label>
 
                         {field.type === "choice" && (
                             <div className={styles.optionsManager}>

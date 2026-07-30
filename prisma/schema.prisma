@@ -20,13 +20,19 @@ model Form {
 }
 
 model FormField {
-    id        String   @id @default(uuid())
+    id        String    @id @default(uuid())
     formId    String
-    form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
-    type      String   
+    form      Form      @relation(fields: [formId], references: [id], onDelete: Cascade)
+    type      String
     label     String
-    order     Int      @default(0)
+    order     Int       @default(0)
+    page      Int       @default(0)
     options   String[]
+    required  Boolean   @default(false)
+    config    Json      @default("{}")
+    deletedAt DateTime?
+
+    @@index([formId, deletedAt])
 }
 
 model Submission {

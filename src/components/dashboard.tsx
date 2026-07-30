@@ -1,13 +1,13 @@
 import React from "react";
 import {Form} from "../types/form";
-import styles from "../styles/dashboard.module.css";
+import styles from "../styles/Dashboard.module.css";
 interface DashboardProps {
   forms: Form[];
   onSelectForm: (id: string) => void;
   onDeleteForm: (e: React.MouseEvent, id: string) => void;
   onShareForm: (e: React.MouseEvent, id: string) => void;
 }
-export default function Dashboard({ forms, onSelectForm, onDeleteForm }: DashboardProps) {
+export default function Dashboard({ forms, onSelectForm, onDeleteForm, onShareForm }: DashboardProps) {
   return (
     <>
       <h1 className={styles.title}>Your Forms</h1>

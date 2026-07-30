@@ -93,7 +93,11 @@ export const FormFieldScalarFieldEnum = {
   type: 'type',
   label: 'label',
   order: 'order',
-  options: 'options'
+  page: 'page',
+  options: 'options',
+  required: 'required',
+  config: 'config',
+  deletedAt: 'deletedAt'
 } as const
 
 export type FormFieldScalarFieldEnum = (typeof FormFieldScalarFieldEnum)[keyof typeof FormFieldScalarFieldEnum]

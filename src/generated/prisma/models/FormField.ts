@@ -28,10 +28,12 @@ export type AggregateFormField = {
 
 export type FormFieldAvgAggregateOutputType = {
   order: number | null
+  page: number | null
 }
 
 export type FormFieldSumAggregateOutputType = {
   order: number | null
+  page: number | null
 }
 
 export type FormFieldMinAggregateOutputType = {
@@ -40,6 +42,9 @@ export type FormFieldMinAggregateOutputType = {
   type: string | null
   label: string | null
   order: number | null
+  page: number | null
+  required: boolean | null
+  deletedAt: Date | null
 }
 
 export type FormFieldMaxAggregateOutputType = {
@@ -48,6 +53,9 @@ export type FormFieldMaxAggregateOutputType = {
   type: string | null
   label: string | null
   order: number | null
+  page: number | null
+  required: boolean | null
+  deletedAt: Date | null
 }
 
 export type FormFieldCountAggregateOutputType = {
@@ -56,17 +64,23 @@ export type FormFieldCountAggregateOutputType = {
   type: number
   label: number
   order: number
+  page: number
   options: number
+  required: number
+  config: number
+  deletedAt: number
   _all: number
 }
 
 
 export type FormFieldAvgAggregateInputType = {
   order?: true
+  page?: true
 }
 
 export type FormFieldSumAggregateInputType = {
   order?: true
+  page?: true
 }
 
 export type FormFieldMinAggregateInputType = {
@@ -75,6 +89,9 @@ export type FormFieldMinAggregateInputType = {
   type?: true
   label?: true
   order?: true
+  page?: true
+  required?: true
+  deletedAt?: true
 }
 
 export type FormFieldMaxAggregateInputType = {
@@ -83,6 +100,9 @@ export type FormFieldMaxAggregateInputType = {
   type?: true
   label?: true
   order?: true
+  page?: true
+  required?: true
+  deletedAt?: true
 }
 
 export type FormFieldCountAggregateInputType = {
@@ -91,7 +111,11 @@ export type FormFieldCountAggregateInputType = {
   type?: true
   label?: true
   order?: true
+  page?: true
   options?: true
+  required?: true
+  config?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -187,7 +211,11 @@ export type FormFieldGroupByOutputType = {
   type: string
   label: string
   order: number
+  page: number
   options: string[]
+  required: boolean
+  config: runtime.JsonValue
+  deletedAt: Date | null
   _count: FormFieldCountAggregateOutputType | null
   _avg: FormFieldAvgAggregateOutputType | null
   _sum: FormFieldSumAggregateOutputType | null
@@ -219,7 +247,11 @@ export type FormFieldWhereInput = {
   type?: Prisma.StringFilter<"FormField"> | string
   label?: Prisma.StringFilter<"FormField"> | string
   order?: Prisma.IntFilter<"FormField"> | number
+  page?: Prisma.IntFilter<"FormField"> | number
   options?: Prisma.StringNullableListFilter<"FormField">
+  required?: Prisma.BoolFilter<"FormField"> | boolean
+  config?: Prisma.JsonFilter<"FormField">
+  deletedAt?: Prisma.DateTimeNullableFilter<"FormField"> | Date | string | null
   form?: Prisma.XOR<Prisma.FormScalarRelationFilter, Prisma.FormWhereInput>
 }
 
@@ -229,7 +261,11 @@ export type FormFieldOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
   options?: Prisma.SortOrder
+  required?: Prisma.SortOrder
+  config?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   form?: Prisma.FormOrderByWithRelationInput
 }
 
@@ -242,7 +278,11 @@ export type FormFieldWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"FormField"> | string
   label?: Prisma.StringFilter<"FormField"> | string
   order?: Prisma.IntFilter<"FormField"> | number
+  page?: Prisma.IntFilter<"FormField"> | number
   options?: Prisma.StringNullableListFilter<"FormField">
+  required?: Prisma.BoolFilter<"FormField"> | boolean
+  config?: Prisma.JsonFilter<"FormField">
+  deletedAt?: Prisma.DateTimeNullableFilter<"FormField"> | Date | string | null
   form?: Prisma.XOR<Prisma.FormScalarRelationFilter, Prisma.FormWhereInput>
 }, "id">
 
@@ -252,7 +292,11 @@ export type FormFieldOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
   options?: Prisma.SortOrder
+  required?: Prisma.SortOrder
+  config?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FormFieldCountOrderByAggregateInput
   _avg?: Prisma.FormFieldAvgOrderByAggregateInput
   _max?: Prisma.FormFieldMaxOrderByAggregateInput
@@ -269,7 +313,11 @@ export type FormFieldScalarWhereWithAggregatesInput = {
   type?: Prisma.StringWithAggregatesFilter<"FormField"> | string
   label?: Prisma.StringWithAggregatesFilter<"FormField"> | string
   order?: Prisma.IntWithAggregatesFilter<"FormField"> | number
+  page?: Prisma.IntWithAggregatesFilter<"FormField"> | number
   options?: Prisma.StringNullableListFilter<"FormField">
+  required?: Prisma.BoolWithAggregatesFilter<"FormField"> | boolean
+  config?: Prisma.JsonWithAggregatesFilter<"FormField">
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FormField"> | Date | string | null
 }
 
 export type FormFieldCreateInput = {
@@ -277,7 +325,11 @@ export type FormFieldCreateInput = {
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
   form: Prisma.FormCreateNestedOneWithoutFieldsInput
 }
 
@@ -287,7 +339,11 @@ export type FormFieldUncheckedCreateInput = {
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
 }
 
 export type FormFieldUpdateInput = {
@@ -295,7 +351,11 @@ export type FormFieldUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   form?: Prisma.FormUpdateOneRequiredWithoutFieldsNestedInput
 }
 
@@ -305,7 +365,11 @@ export type FormFieldUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FormFieldCreateManyInput = {
@@ -314,7 +378,11 @@ export type FormFieldCreateManyInput = {
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
 }
 
 export type FormFieldUpdateManyMutationInput = {
@@ -322,7 +390,11 @@ export type FormFieldUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FormFieldUncheckedUpdateManyInput = {
@@ -331,7 +403,11 @@ export type FormFieldUncheckedUpdateManyInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FormFieldListRelationFilter = {
@@ -358,11 +434,16 @@ export type FormFieldCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
   options?: Prisma.SortOrder
+  required?: Prisma.SortOrder
+  config?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FormFieldAvgOrderByAggregateInput = {
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
 }
 
 export type FormFieldMaxOrderByAggregateInput = {
@@ -371,6 +452,9 @@ export type FormFieldMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
+  required?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FormFieldMinOrderByAggregateInput = {
@@ -379,10 +463,14 @@ export type FormFieldMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
+  required?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FormFieldSumOrderByAggregateInput = {
   order?: Prisma.SortOrder
+  page?: Prisma.SortOrder
 }
 
 export type FormFieldCreateNestedManyWithoutFormInput = {
@@ -436,12 +524,20 @@ export type FormFieldUpdateoptionsInput = {
   push?: string | string[]
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type FormFieldCreateWithoutFormInput = {
   id?: string
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
 }
 
 export type FormFieldUncheckedCreateWithoutFormInput = {
@@ -449,7 +545,11 @@ export type FormFieldUncheckedCreateWithoutFormInput = {
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
 }
 
 export type FormFieldCreateOrConnectWithoutFormInput = {
@@ -487,7 +587,11 @@ export type FormFieldScalarWhereInput = {
   type?: Prisma.StringFilter<"FormField"> | string
   label?: Prisma.StringFilter<"FormField"> | string
   order?: Prisma.IntFilter<"FormField"> | number
+  page?: Prisma.IntFilter<"FormField"> | number
   options?: Prisma.StringNullableListFilter<"FormField">
+  required?: Prisma.BoolFilter<"FormField"> | boolean
+  config?: Prisma.JsonFilter<"FormField">
+  deletedAt?: Prisma.DateTimeNullableFilter<"FormField"> | Date | string | null
 }
 
 export type FormFieldCreateManyFormInput = {
@@ -495,7 +599,11 @@ export type FormFieldCreateManyFormInput = {
   type: string
   label: string
   order?: number
+  page?: number
   options?: Prisma.FormFieldCreateoptionsInput | string[]
+  required?: boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
 }
 
 export type FormFieldUpdateWithoutFormInput = {
@@ -503,7 +611,11 @@ export type FormFieldUpdateWithoutFormInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FormFieldUncheckedUpdateWithoutFormInput = {
@@ -511,7 +623,11 @@ export type FormFieldUncheckedUpdateWithoutFormInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FormFieldUncheckedUpdateManyWithoutFormInput = {
@@ -519,7 +635,11 @@ export type FormFieldUncheckedUpdateManyWithoutFormInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   options?: Prisma.FormFieldUpdateoptionsInput | string[]
+  required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -530,7 +650,11 @@ export type FormFieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   type?: boolean
   label?: boolean
   order?: boolean
+  page?: boolean
   options?: boolean
+  required?: boolean
+  config?: boolean
+  deletedAt?: boolean
   form?: boolean | Prisma.FormDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["formField"]>
 
@@ -540,7 +664,11 @@ export type FormFieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   type?: boolean
   label?: boolean
   order?: boolean
+  page?: boolean
   options?: boolean
+  required?: boolean
+  config?: boolean
+  deletedAt?: boolean
   form?: boolean | Prisma.FormDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["formField"]>
 
@@ -550,7 +678,11 @@ export type FormFieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   type?: boolean
   label?: boolean
   order?: boolean
+  page?: boolean
   options?: boolean
+  required?: boolean
+  config?: boolean
+  deletedAt?: boolean
   form?: boolean | Prisma.FormDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["formField"]>
 
@@ -560,10 +692,14 @@ export type FormFieldSelectScalar = {
   type?: boolean
   label?: boolean
   order?: boolean
+  page?: boolean
   options?: boolean
+  required?: boolean
+  config?: boolean
+  deletedAt?: boolean
 }
 
-export type FormFieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "formId" | "type" | "label" | "order" | "options", ExtArgs["result"]["formField"]>
+export type FormFieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "formId" | "type" | "label" | "order" | "page" | "options" | "required" | "config" | "deletedAt", ExtArgs["result"]["formField"]>
 export type FormFieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   form?: boolean | Prisma.FormDefaultArgs<ExtArgs>
 }
@@ -585,7 +721,11 @@ export type $FormFieldPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     type: string
     label: string
     order: number
+    page: number
     options: string[]
+    required: boolean
+    config: runtime.JsonValue
+    deletedAt: Date | null
   }, ExtArgs["result"]["formField"]>
   composites: {}
 }
@@ -1015,7 +1155,11 @@ export interface FormFieldFieldRefs {
   readonly type: Prisma.FieldRef<"FormField", 'String'>
   readonly label: Prisma.FieldRef<"FormField", 'String'>
   readonly order: Prisma.FieldRef<"FormField", 'Int'>
+  readonly page: Prisma.FieldRef<"FormField", 'Int'>
   readonly options: Prisma.FieldRef<"FormField", 'String[]'>
+  readonly required: Prisma.FieldRef<"FormField", 'Boolean'>
+  readonly config: Prisma.FieldRef<"FormField", 'Json'>
+  readonly deletedAt: Prisma.FieldRef<"FormField", 'DateTime'>
 }
     
 

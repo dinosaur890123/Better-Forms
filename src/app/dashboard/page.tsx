@@ -101,10 +101,10 @@ export default function Home() {
   const addField = (type: "text" | "checkbox" | "choice" | "rating" | "email") => {
     if (!activeForm) return;
     const newField: FormField = {
-      id: Date.now().toString(), label: type === "text" ? "New text question" : type === "email" ? "New email question" : type === "rating" ? "Rate your experience"
+      id: crypto.randomUUID(), label: type === "text" ? "New text question" : type === "email" ? "New email question" : type === "rating" ? "Rate your experience"
           : type === "choice"
           ? "Select an option"
-          : "New Checkbox option", type, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
+          : "New Checkbox option", type, required: false, page: 0, config: {}, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
     };
 
     setForms(
@@ -136,6 +136,18 @@ export default function Home() {
         f.id === activeForm.id
           ? {
               ...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, label} : fd)
+            } : f
+      )
+    );
+  };
+
+  const toggleRequired = (fieldId: string, required: boolean) => {
+    if (!activeForm) return;
+    setForms(
+      forms.map((f) =>
+        f.id === activeForm.id
+          ? {
+              ...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, required} : fd)
             } : f
       )
     );
@@ -218,16 +230,17 @@ export default function Home() {
     e.preventDefault();
     if (!activeForm) return;
     setIsSaving(true);
-    const success = await submitFormResponse(activeForm.id, testResponses);
+    const result = await submitFormResponse(activeForm.id, testResponses);
     setIsSaving(false);
 
-    if (success) {
+    if (result.ok) {
       alert(`Response recorded in Postgres!\n\nData Submitted:\n${JSON.stringify(testResponses, null, 2)}`);
       setSelectedFormId(null);
       setTestResponses({});
       setForms(await getForms());
     } else {
-      alert("Failed to submit form response");
+      const problems = result.errors ? Object.values(result.errors).join("\n") : result.message;
+      alert(`Failed to submit form response\n\n${problems ?? ""}`);
     }
   };
 
@@ -273,7 +286,7 @@ export default function Home() {
       <main className={styles.main}>
         
         {selectedFormId === null ? (
-          <Dashboard forms={forms} onSelectForm={setSelectedFormId} onDeleteForm={requestDeleteForm}/>
+          <Dashboard forms={forms} onSelectForm={setSelectedFormId} onDeleteForm={requestDeleteForm} onShareForm={requestShareForm}/>
         ):(
           activeForm && (
             <div className={styles.workspace}>
@@ -282,6 +295,7 @@ export default function Home() {
                 onAddField={addField}
                 onDeleteField={deleteField}
                 onUpdateFieldLabel={updateFieldLabel}
+                onToggleRequired={toggleRequired}
                 onAddChoiceOption={addChoiceOption}
                 onUpdateChoiceOption={updateChoiceOption}
                 onDeleteChoiceOption={deleteChoiceOption}
