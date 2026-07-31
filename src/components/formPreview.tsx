@@ -24,12 +24,26 @@ export default function FormPreview({
         {form.fields.length === 0 ? (
             <p style={{color: "#64748b", fontSize: "0.867rem", textAlign: "center", padding: "2rem"}}>No fields added. Add questions on the left panel</p>
         ):(
-            form.fields.map((field) => (
-                <div key={field.id} className={styles.formGroup}>
+            form.fields.map((field, idx) => {
+                const startsPage = idx > 0 && field.page > form.fields[idx - 1].page;
+                return (
+                    <React.Fragment key={field.id}>
+                        {(idx === 0 || startsPage) && (
+                            <div className={styles.pageDivider}>
+                                <span className={styles.pageDividerLabel}>Page {field.page + 1}</span>
+                            </div>
+                        )}
+                <div className={styles.formGroup}>
                     <label className={styles.formLabel}>{field.label}</label>
+                    {field.config.description && (
+                        <p style={{fontSize: "0.8rem", color: "#5d718c", marginBottom: "0.4rem"}}>{field.config.description}</p>
+                    )}
 
                     {field.type === "text" && (
-                        <input type="text" placeholder="Your answer" className={styles.textInput} value={testResponses[field.id] || ""} onChange={(e) => onTestValueChange(field.id, e.target.value)}/>
+                        <input type="text" placeholder={field.config.placeholder || "Your answer"} className={styles.textInput} value={testResponses[field.id] || ""} onChange={(e) => onTestValueChange(field.id, e.target.value)}/>
+                    )}
+                    {field.type === "email" && (
+                        <input type="email" placeholder={field.config.placeholder||"you@example.com"} className={styles.textInput} value={testResponses[field.id]||""} onChange={(e) => onTestValueChange(field.id, e.target.value)}/>
                     )}
                     {field.type === "rating" && (
                         <div className={styles.ratingStars}>{[1, 2, 3, 4, 5].map((star) => (<button key={star} type="button" className={`${styles.starButton} ${(testResponses[field.id] || 0) >= star ? styles.starActive : ""}`} onClick={() => onTestValueChange(field.id, star)}>★</button>))}</div>
@@ -52,10 +66,12 @@ export default function FormPreview({
                         </div>
                     )}
                 </div>
-            ))
+                    </React.Fragment>
+                );
+            })
         )}
         {form.fields.length > 0 && (
-            <button type="submit" className={styles.submitBtn}>Submit response</button>
+            <button type="submit" className={styles.submitButton}>Submit response</button>
         )}
         </form>
     </div>

@@ -133,6 +133,9 @@
     color: #64748b;
     font-weight: 500;
     flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    font-size: 0.67rem;
 }
 
 .configInput {
@@ -145,4 +148,39 @@
 .configRow {
     display: flex;
     gap: 0.67rem;
+}
+
+.pageDivider {
+    display: flex;
+    align-items: center;
+    gap: 0.67rem;
+    margin: 0.4rem 0;
+    color: #4f46e5;
+}
+
+.pageDivider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #d6dcea;
+}
+
+.pageDividerLabel {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.breakButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4f46e5;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.breakButton:hover {
+    text-decoration: underline;
 }

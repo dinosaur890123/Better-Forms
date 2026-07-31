@@ -12,7 +12,17 @@ import FormPreview from "../../components/formPreview";
 import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser, updateFormSettings} from "../actions";
 import ConfirmModal from "../../components/ConfirmModal";
 
-
+function normalisePages(fields: FormField[]): FormField[] {
+  let previous = -1;
+  let current = -1;
+  return fields.map((f)=> {
+    if (f.page !== previous) {
+      previous = f.page;
+      current += 1;
+    }
+    return f.page === current ? f : {...f, page: current};
+  })
+}
 export default function Home() {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -104,7 +114,7 @@ export default function Home() {
       id: crypto.randomUUID(), label: type === "text" ? "New text question" : type === "email" ? "New email question" : type === "rating" ? "Rate your experience"
           : type === "choice"
           ? "Select an option"
-          : "New Checkbox option", type, required: false, page: 0, config: {}, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
+          : "New Checkbox option", type, required: false, page: activeForm.fields.length ? activeForm.fields[activeForm.fields.length - 1].page : 0, config: {}, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
     };
 
     setForms(
@@ -118,8 +128,7 @@ export default function Home() {
     if (!activeForm) return;
     setForms(
       forms.map((f) =>
-        f.id === activeForm.id ? {...f, fields: f.fields.filter((fd) => fd.id !== fieldId)}
-          : f
+        f.id === activeForm.id ? {...f, fields: normalisePages(f.fields.filter((fd) => fd.id !== fieldId))}: f
       )
     );
 
@@ -127,6 +136,21 @@ export default function Home() {
     delete updatedResponses[fieldId];
     setTestResponses(updatedResponses);
   };
+
+  const togglePageBreak = (fieldId: string) => {
+    if (!activeForm) return;
+    const idx = activeForm.fields.findIndex((f)=> f.id === fieldId);
+    if (idx <= 0) return;
+    const startsPage = activeForm.fields[idx].page > activeForm.fields[idx - 1].page;
+    const delta = startsPage ? -1 : 1;
+
+    setForms(
+      forms.map((f) =>
+        f.id === activeForm.id? {...f, fields: f.fields.map((fd, i) => (i >= idx ? {...fd, page: fd.page + delta}:fd))}
+          : f
+      )
+    );
+  }
 
 
   const updateFieldLabel = (fieldId: string, label: string) => {
@@ -158,7 +182,7 @@ export default function Home() {
     setForms(
       forms.map((f) => 
         f.id === activeForm.id ? {
-          ...f, ields: f.fields.map((fd) => {
+          ...f, fields: f.fields.map((fd) => {
             if (fd.id !== fieldId) return fd;
             const config = {...fd.config, ...patch};
             for (const key of Object.keys(patch) as (keyof FieldConfig)[]) {
@@ -317,6 +341,8 @@ export default function Home() {
                 onAddChoiceOption={addChoiceOption}
                 onUpdateChoiceOption={updateChoiceOption}
                 onDeleteChoiceOption={deleteChoiceOption}
+                onUpdateFieldConfig={updateFieldConfig}
+                onTogglePageBreak={togglePageBreak}
               />
               <FormPreview 
                 form={activeForm}

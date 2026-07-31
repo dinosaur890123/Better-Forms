@@ -1,6 +1,6 @@
 "use client";
-import React, {useState, useRef} from "react";
-import {Form} from "../types/form";
+import React, {useState, useRef, useMemo} from "react";
+import {Form, FormField} from "../types/form";
 import {submitFormResponse} from "../app/actions";
 import {validateAnswers} from "../lib/validation";
 import styles from "../styles/FormPreview.module.css";
@@ -13,6 +13,44 @@ export default function PublicForm({form}: {form: Form}) {
     const [error, setError] = useState<string | null>(null);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
     const startTimeRef = useRef<number>(Date.now());
+    const [pageIndex, setPageIndex] = useState(0);
+
+    const pages = useMemo(() => {
+        const groups = new Map<number, FormField[]>();
+        for (const field of form.fields) {
+            const key = field.page ?? 0;
+            const group = groups.get(key);
+            if (group) group.push(field);
+            else groups.set(key, [field]);
+        }
+        return [...groups.keys()].sort((a, b) => a - b).map((k) => groups.get(k)!);
+    }, [form.fields]);
+
+    const currentFields = pages[pageIndex] ?? [];
+    const isLastPage = pageIndex >= pages.length - 1;
+
+    const jumpToFirstError = (errors: Record<string, string>) => {
+        const firstBad = form.fields.find((f) => errors[f.id]);
+        if (!firstBad) return;
+        const target = pages.findIndex((p) => p.some((f) => f.id === firstBad.id));
+        if (target >= 0) setPageIndex(target);
+    };
+
+    const goNext = () => {
+        const errors = validateAnswers(currentFields, responses);
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
+            return;
+        }
+        setFieldErrors({});
+        setPageIndex(pageIndex + 1);
+        window.scrollTo({top: 0, behavior: "smooth"});
+    };
+
+    const goBack = () => {
+        setPageIndex(Math.max(0, pageIndex - 1));
+        window.scrollTo({top: 0, behavior: "smooth"});
+    };
 
     const setValue = (fieldId: string, value: any) => {
         setResponses({...responses, [fieldId]: value});
@@ -30,6 +68,7 @@ export default function PublicForm({form}: {form: Form}) {
         const localErrors = validateAnswers(form.fields, responses);
         if (Object.keys(localErrors).length > 0) {
             setFieldErrors(localErrors);
+            jumpToFirstError(localErrors);
             return;
         }
 
@@ -43,6 +82,7 @@ export default function PublicForm({form}: {form: Form}) {
             setDone(true);
         } else if (result.errors) {
             setFieldErrors(result.errors);
+            jumpToFirstError(result.errors);
         } else {
             setError(result.message ?? "Something went wrong, try again.");
         }
@@ -76,7 +116,7 @@ export default function PublicForm({form}: {form: Form}) {
                     This form doesn't have questions
                 </p>
             ):(
-                form.fields.map((field) => (
+                currentFields.map((field) => (
                     <div key={field.id} className={styles.formGroup}>
                         <label className={styles.formLabel}>
                             {field.label}
@@ -134,8 +174,26 @@ export default function PublicForm({form}: {form: Form}) {
                 </p>
             )}
 
+            {pages.length > 1 && (
+                <div className={styles.pageProgress} aria-hidden="true">
+                    <div className={styles.pageProgressBar} style={{width: `${((pageIndex + 1) / pages.length) * 100}%`}}/>
+                </div>
+            )}
+
             {form.fields.length > 0 && (
-                <button type="submit" className="button button-success" style={{width: "100%", marginTop: "0.rem"}} disabled={submitting}>{submitting ? "Submitting..." : "Submit response"}</button>
+                <div className={styles.pageNav}>
+                    {pageIndex > 0 && (
+                        <button type="button" className="button button-secondary" onClick={goBack} disabled={submitting}>Back</button>
+                    )}
+                    {pages.length > 1 && (
+                        <span className={styles.pageCount}>Page {pageIndex + 1} of {pages.length}</span>
+                    )}
+                    {isLastPage ? (
+                        <button type="submit" className="button button-success" style={{flex: 1}} disabled={submitting}>{submitting ? "Submitting..." : "Submit response"}</button>
+                    ) : (
+                        <button type="button" className="button button-success" style={{flex: 1}} onClick={goNext}>Next</button>
+                    )}
+                </div>
             )}
         </form>
     )

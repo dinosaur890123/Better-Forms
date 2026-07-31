@@ -186,16 +186,20 @@ export async function submitFormResponse(formId: string, answers: Record<string,
 }
 
 export async function getFormFieldHistory(formId: string):Promise<FormField[]> {
-    const user = await getCurrentUser();
-
-    if (!user) return [];
-    const owned = await prisma.form.findFirst({where: {id: formId, userId: user.id}});
-    if (!owned) return [];
-    const fields = await prisma.formField.findMany({
-        where: {formId},
-        orderBy: [{page: "asc"}, {order: "asc"}]
-    });
-    return fields.map(toFormField);
+    try {
+        const user = await getCurrentUser();
+        if (!user) return [];
+        const owned = await prisma.form.findFirst({where: {id: formId, userId: user.id}});
+        if (!owned) return [];
+        const fields = await prisma.formField.findMany({
+            where: {formId},
+            orderBy: [{page: "asc"}, {order: "asc"}]
+        });
+        return fields.map(toFormField);
+    } catch (error) {
+        console.error("Failed to fetch form field history:", error);
+        return [];
+    }
 }
 export async function getPublicForm(id: string): Promise<Form | null> {
     try {

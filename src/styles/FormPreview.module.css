@@ -76,3 +76,51 @@
 .submitButton:hover {
     background-color: #4134c7;
 }
+
+.pageDivider {
+    display: flex;
+    align-items: center;
+    gap: 0.67rem;
+    margin: 0.4rem 0;
+    color: #4f46e5;
+}
+
+.pageDivider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #d6dcea;
+}
+
+.pageDividerLabel {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pageProgress {
+    height: 4px;
+    border-radius: 999px;
+    background-color: #e2e8f0;
+    overflow: hidden;
+}
+
+.pageProgressBar {
+    height: 100%;
+    background-color: #3452b4;
+    transition: width 200ms ease;
+}
+
+.pageNav {
+    display: flex;
+    align-items: center;
+    gap: 0.67rem;
+    margin-top: 0.67rem;
+}
+
+.pageCount {
+    font-size: 0.8rem;
+    color: #64748b;
+    white-space: nowrap;
+}

@@ -6,13 +6,6 @@ import styles from "../../../../styles/PublicPage.module.css";
 import {formatDuration} from "../../../../lib/time";
 export const dynamic = "force-dynamic";
 
-function formatAnswer(value: any): string {
-    if (value === undefined || value === null || value === "") return "—";
-    if (typeof value === "boolean") return value ? "Yes" : "No";
-    if (Array.isArray(value)) return value.join(", ");
-    return String(value);
-}
-
 export default async function ResponsesPage({
     params,
 }:{
@@ -25,6 +18,10 @@ export default async function ResponsesPage({
         getFormSubmissions(id),
         getFormFieldHistory(id),
     ]);
+
+    const columns = history.filter(
+        (field) => !field.deleted || submissions.some((s) => s.answers[field.id] !== undefined)
+    );
 
     return (
         <div className={`${styles.page} ${styles.wide}`}>
@@ -48,8 +45,11 @@ export default async function ResponsesPage({
                             <tr>
                                 <th>Submitted</th>
                                 <th>Time spent</th>
-                                {form.fields.map((field) => (
-                                    <th key={field.id}>{field.label}</th>
+                                {columns.map((field) => (
+                                    <th key={field.id}>
+                                        {field.label}
+                                        {field.deleted && <span className={styles.removedTag}>removed</span>}
+                                    </th>
                                 ))}
                             </tr>
                         </thead>
@@ -59,7 +59,7 @@ export default async function ResponsesPage({
                                 <tr key={s.id}>
                                     <td>{s.submittedAt.toLocaleString()}</td>
                                     <td>{formatDuration(s.durationMs)}</td>
-                                    {form.fields.map((field) => (
+                                    {columns.map((field) => (
                                         <td key={field.id}>{formatAnswer(s.answers[field.id])}</td>
                                     ))}
                                 </tr>
