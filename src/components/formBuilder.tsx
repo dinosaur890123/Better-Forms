@@ -1,5 +1,5 @@
 import React from "react";
-import {Form} from "../types/form";
+import {Form, FieldConfig} from "../types/form";
 import styles from "../styles/FormBuilder.module.css";
 
 interface FormBuilderProps {
@@ -11,10 +11,11 @@ interface FormBuilderProps {
     onAddChoiceOption: (fieldId: string) => void;
     onUpdateChoiceOption: (fieldId: string, optionIdx: number, value: string) => void;
     onDeleteChoiceOption: (fieldId: string, optionIdx: number) => void;
+    onUpdateFieldConfig: (fieldId: string, patch: Partial<FieldConfig>) => void;
 }
 
 export default function FormBuilder({
-    form, onAddField, onDeleteField, onUpdateFieldLabel, onToggleRequired, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption
+    form, onAddField, onDeleteField, onUpdateFieldLabel, onToggleRequired, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption, onUpdateFieldConfig
 }: FormBuilderProps) {
     return (
         <div className={styles.editorPanel}>
@@ -36,6 +37,25 @@ export default function FormBuilder({
                             <input type="checkbox" checked={field.required} onChange={(e) => onToggleRequired(field.id, e.target.checked)}/>
                             Required
                         </label>
+
+                        <div className={styles.configGrid}>
+                            <label className={styles.configLabel}>Help text</label>
+                            <input type="text" className={styles.configInput} value={field.config.placeholder ?? ""}  onChange={(e)=>onUpdateFieldConfig(field.id,{placeholder: e.target.value})}placeholder={field.type === "email"?"67@example.com" : "Your response..."}/>
+                        </div>
+
+
+                        {field.type === "text" && (
+                            <div className={styles.configRow}>
+                                <label className={styles.configLabel}>Min length
+                                    <input type="number" min={0} className={styles.configInput} value={field.config.minLength ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{minLength: e.target.value===""?undefined:Number(e.target.value)})}/>
+                                </label>
+
+                                <label className={styles.configLabel}>
+                                    Max length
+                                    <input type="number" min={0} className={styles.configInput} value={field.config.maxLength ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{minLength: e.target.value===""?undefined:Number(e.target.value)})}/>
+                                </label>
+                            </div>
+                        )}
 
                         {field.type === "choice" && (
                             <div className={styles.optionsManager}>

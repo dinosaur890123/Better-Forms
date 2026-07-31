@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import {getOwnedForm, getFormSubmissions} from "../../../actions";
+import {getOwnedForm, getFormSubmissions, getFormFieldHistory} from "../../../actions";
+import {formatAnswer} from "../../../../lib/answers";
 import styles from "../../../../styles/PublicPage.module.css";
 import {formatDuration} from "../../../../lib/time";
 export const dynamic = "force-dynamic";
@@ -20,7 +21,10 @@ export default async function ResponsesPage({
     const {id} = await params;
     const form = await getOwnedForm(id);
     if (!form) notFound();
-    const submissions = await getFormSubmissions(id);
+    const [submissions, history] = await Promise.all([
+        getFormSubmissions(id),
+        getFormFieldHistory(id),
+    ]);
 
     return (
         <div className={`${styles.page} ${styles.wide}`}>

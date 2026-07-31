@@ -16,7 +16,6 @@ export default function PublicForm({form}: {form: Form}) {
 
     const setValue = (fieldId: string, value: any) => {
         setResponses({...responses, [fieldId]: value});
-        // Clear a field's error as soon as the respondent edits it
         if (fieldErrors[fieldId]) {
             const next = {...fieldErrors};
             delete next[fieldId];
@@ -88,11 +87,12 @@ export default function PublicForm({form}: {form: Form}) {
                         )}
 
                         {field.type === "text" && (
-                            <input type="text" placeholder="Your answer..." className={styles.textInput} value={responses[field.id] || ""} onChange={(e) => setValue(field.id, e.target.value)}/>
+                            <input type="text" placeholder={field.config.placeholder||"Your answer..."} className={styles.textInput} value={responses[field.id]||""} onChange={(e) => setValue(field.id, e.target.value)}/>
                         )}
+                        
 
                         {field.type === "email" && (
-                            <input type="email" placeholder="test@dinosaur890123.com" className={styles.textInput} value={responses[field.id] || ""} onChange={(e) => setValue(field.id, e.target.value)}/>
+                            <input type="email" placeholder={field.config.placeholder||"67@example.com"} className={styles.textInput} value={responses[field.id]||""} onChange={(e) => setValue(field.id, e.target.value)}/>
                         )}
 
                         {field.type === "rating" && (

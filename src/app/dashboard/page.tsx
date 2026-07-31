@@ -4,7 +4,7 @@ import {signOut} from "../auth/actions";
 import {useState, useEffect, useRef} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-import {Form, FormField} from "../../types/form";
+import {Form, FormField, FieldConfig} from "../../types/form";
 import Dashboard from "../../components/dashboard";
 import CreateFormModal from "../../components/createFormModal";
 import FormBuilder from "../../components/formBuilder";
@@ -149,6 +149,24 @@ export default function Home() {
           ? {
               ...f, fields: f.fields.map((fd) => fd.id === fieldId ? {...fd, required} : fd)
             } : f
+      )
+    );
+  };
+
+  const updateFieldConfig = (fieldId: string, patch: Partial<FieldConfig>) => {
+    if (!activeForm) return;
+    setForms(
+      forms.map((f) => 
+        f.id === activeForm.id ? {
+          ...f, ields: f.fields.map((fd) => {
+            if (fd.id !== fieldId) return fd;
+            const config = {...fd.config, ...patch};
+            for (const key of Object.keys(patch) as (keyof FieldConfig)[]) {
+              if (patch[key] === undefined||patch[key] === "") delete config[key];
+            }
+            return {...fd, config};
+          })
+        } :f
       )
     );
   };

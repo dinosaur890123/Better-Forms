@@ -120,3 +120,29 @@
 .toolButton:hover {
     background-color: #4134c7;
 }
+
+.configGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.67rem;
+}
+
+.configLabel {
+    display: flex;
+    color: #64748b;
+    font-weight: 500;
+    flex-direction: column;
+}
+
+.configInput {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    color: #243248;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+}
+.configRow {
+    display: flex;
+    gap: 0.67rem;
+}
