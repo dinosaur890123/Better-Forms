@@ -8,76 +8,92 @@
 
 .card {
     width: 100%;
-    max-width: 467px;
-    background-color: #142850;
-    border-radius: 14px;
-    padding: 2.2rem;
+    max-width: 367px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.67rem;
 }
 
 .logo {
-    font-size: 1.67rem;
-    color: white;
-    text-align: center;
-    margin-bottom: 1.67rem;
+    font-size: 1.267rem;
+    font-weight: 670;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 0.267rem;
 }
 
 .subtitle {
     font-size: 0.867rem;
-    color: #a9b8d4;
-    text-align: center;
+    color: var(--text-muted);
     margin-bottom: 1.67rem;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: 1.067rem;
 }
 
 .label {
     display: block;
     font-size: 0.767rem;
-    font-weight: 670;
-    color: #7f9acb;
-    margin-bottom: 0.4rem;
+    font-weight: 567;
+    color: var(--text-muted);
+    margin-bottom: 0.367rem;
 }
 
 .input {
     width: 100%;
-    background-color: #0f2043;
-    border: 1px solid #2d4d8b;
-    border-radius: 8px;
-    padding: 0.6rem 0.75rem;
-    color: #eaf0fb;
-    font-size: 0.9rem;
+    background-color: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 0.567rem 0.67rem;
+    font-size: 0.867rem;
     font-family: inherit;
 }
 
 .input::placeholder {
-    color: #6d82ab;
+    color: var(--text-subtle);
 }
 
 .input:focus {
     outline: none;
-    border-color: #4667ea;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.checkRow {
+    display: flex;
+    align-items: center;
+    gap: 0.467rem;
+    margin-top: 0.67rem;
+    font-size: 0.767rem;
+    color: var(--text-muted);
+}
+
+.checkRow input {
+    accent-color: var(--accent);
 }
 
 .button {
     width: 100%;
     margin-top: 0.67rem;
-    padding: 0.65rem 1rem;
-    background-color: #3452b4;
-    color: white;
-    border: none;
-    border-radius: 7px;
+    padding: 0.567rem 0.9rem;
+    background-color: var(--accent);
+    color: var(--on-accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.867rem;
+    font-weight: 567;
     font-family: inherit;
 }
 
 .button:hover:not(:disabled) {
-    background-color: #4262de;
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
 }
 
 .button:disabled {
@@ -86,25 +102,25 @@
 }
 
 .error {
-    background-color: #3b1620;
-    border: 1px solid #6d2233;
-    color: #ffb3c0;
-    border-radius: 8px;
-    padding: 0.67rem 0.8rem;
-    font-size: 0.867rem;
+    background-color: #fdf2f0;
+    border: 1px solid #f0cfc9;
+    color: var(--danger);
+    border-radius: var(--radius);
+    padding: 0.567rem 0.67rem;
+    font-size: 0.8rem;
 }
 
 .footer {
     text-align: center;
-    margin-top: 1.4rem;
-    font-size: 0.833rem;
-    color: #a9b8d4;
+    margin-top: 1.467rem;
+    font-size: 0.767rem;
+    color: var(--text-muted);
 }
 
 .link {
-    color: #6d8bff;
+    color: var(--accent);
     text-decoration: none;
-    font-weight: 670;
+    font-weight: 567;
 }
 
 .link:hover {

@@ -31,6 +31,7 @@ export default function SignIn() {
         <main className={styles.container}>
             <div className={styles.card}>
                 <h1 className={styles.logo}>Better Forms</h1>
+                <p className={styles.subtitle}>Sign in to get back to your forms.</p>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     {error && <div className={styles.error}>{error}</div>}
                     <div>
@@ -40,7 +41,7 @@ export default function SignIn() {
                     <div>
                         <label className={styles.label}>Password</label>
                         <input type={showPassword ? "text":"password"} className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Your password" required/>
-                        <label style={{display: "flex", alignItems: "center", marginTop: "0.67rem", fontSize: "0.767rem", color: "#93aad6"}}>
+                        <label className={styles.checkRow}>
                             <input type="checkbox" checked={showPassword} onChange={(e) => setShowPassword(e.target.checked)}/>
                             Show password
                         </label>

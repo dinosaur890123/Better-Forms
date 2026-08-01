@@ -30,6 +30,7 @@ export default function SignUp() {
         <main className={styles.container}>
             <div className={styles.card}>
                 <h1 className={styles.logo}>Better Forms</h1>
+                <p className={styles.subtitle}>Create an account and start building forms.</p>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     {error && <div className={styles.error}>{error}</div>}
                     <div>
