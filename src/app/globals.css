@@ -41,6 +41,8 @@ body {
   background-color: var(--surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
+  padding: 0.55rem 0.7rem;
+  font-family: inherit;
 }
 .input::placeholder {
   color: var(--text-subtle);
@@ -50,9 +52,18 @@ body {
   border-color: var(--accent);
 }
 .button {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
   font-size: 0.867rem;
   font-weight: 567;
+  font-family: inherit;
+  text-decoration: none;
 }
 
 .button:disabled {
@@ -75,7 +86,7 @@ body {
   border-color: var(--border-strong);
 }
 .button-secondary:hover:not(:disabled) {
-  background-color: var(--surface-2);
+  background-color: var(--accent-soft);
   border-color: var(--text-subtle);
 }
 .button-danger {
@@ -88,10 +99,13 @@ body {
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  padding: 1.67rem;
 }
 
 .badge {
+  display: inline-flex;
   align-items: center;
+  padding: 0.15rem 0.55rem;
   font-size: 0.67rem;
   font-weight: 567;
   border-radius: 670px;

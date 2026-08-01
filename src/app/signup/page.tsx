@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
 import {signUp} from "../auth/actions";
-import styles from "../../styles/Auth.module.css"; // note to self to make this later
+import styles from "../../styles/Auth.module.css";
 
 export default function SignUp() {
     const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ export default function SignUp() {
         if (result?.error) {
             setError(result.error);
         } else {
-            router.push("/");
+            router.push("/dashboard");
             router.refresh();
         }
     };
@@ -41,12 +41,12 @@ export default function SignUp() {
                         <input type="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Your password" required />
                     </div>
                     <button type="submit" className={styles.button} disabled={loading}>
-                        {loading ? "Signing in..." : "Sign in!"}
+                        {loading ? "Creating account..." : "Sign up"}
                     </button>
                 </form>
 
                 <p className={styles.footer}>
-                    Don't have an account? You can <Link href="/signup" className={styles.link}>sign up!</Link>
+                    Already have an account? You can <Link href="/signin" className={styles.link}>sign in!</Link>
                 </p>
             </div>
         </main>

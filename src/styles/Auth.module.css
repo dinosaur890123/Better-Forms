@@ -3,55 +3,83 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1.67rem;
+}
+
+.card {
+    width: 100%;
+    max-width: 467px;
+    background-color: #142850;
+    border-radius: 14px;
+    padding: 2.2rem;
 }
 
 .logo {
     font-size: 1.67rem;
     color: white;
     text-align: center;
-    margin-bottom: 0.467rem;
+    margin-bottom: 1.67rem;
 }
-.card {
-    width: 100%;
-    max-width: 467px;
-    background-color: #142850;
-    border-radius: 14px;
-}
+
 .subtitle {
     font-size: 0.867rem;
     color: #a9b8d4;
+    text-align: center;
+    margin-bottom: 1.67rem;
 }
 
 .form {
+    display: flex;
     flex-direction: column;
+    gap: 1.1rem;
 }
+
 .label {
     display: block;
     font-size: 0.767rem;
     font-weight: 670;
     color: #7f9acb;
+    margin-bottom: 0.4rem;
 }
 
 .input {
     width: 100%;
     background-color: #0f2043;
     border: 1px solid #2d4d8b;
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    color: #eaf0fb;
+    font-size: 0.9rem;
+    font-family: inherit;
 }
+
+.input::placeholder {
+    color: #6d82ab;
+}
+
 .input:focus {
     outline: none;
     border-color: #4667ea;
 }
 
 .button {
+    width: 100%;
     margin-top: 0.67rem;
+    padding: 0.65rem 1rem;
+    background-color: #3452b4;
     color: white;
     border: none;
     border-radius: 7px;
     cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
 }
-.button:hover {
+
+.button:hover:not(:disabled) {
     background-color: #4262de;
 }
+
 .button:disabled {
     cursor: not-allowed;
     opacity: 0.67;
@@ -59,13 +87,18 @@
 
 .error {
     background-color: #3b1620;
+    border: 1px solid #6d2233;
     color: #ffb3c0;
     border-radius: 8px;
+    padding: 0.67rem 0.8rem;
     font-size: 0.867rem;
 }
 
 .footer {
     text-align: center;
+    margin-top: 1.4rem;
+    font-size: 0.833rem;
+    color: #a9b8d4;
 }
 
 .link {
@@ -73,6 +106,7 @@
     text-decoration: none;
     font-weight: 670;
 }
+
 .link:hover {
     text-decoration: underline;
 }
