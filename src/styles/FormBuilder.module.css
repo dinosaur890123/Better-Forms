@@ -1,15 +1,18 @@
 .editorPanel {
-    background-color: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 1.67rem;
 }
 .panelHeader {
     margin-bottom: 1.67rem;
+    color: #94a9c4;
+    font-size: 0.867rem;
 }
-
-.optionsManager {
-    margin-top: 0.67rem;
+.panelHeader h2 {
+    font-size: 1.067rem;
+    font-weight: 670;
+    color: #e9eff7;
+    margin-bottom: 0.2rem;
 }
 
 .fieldsList {
@@ -19,8 +22,7 @@
     flex-direction: column;
 }
 .editorFieldCard {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border: 1px solid #24405c;
     padding: 1rem;
 }
 .fieldHeader {
@@ -33,21 +35,32 @@
 .fieldBadge {
     font-size: 0.67rem;
     font-weight: 600;
-    color: #4f46e5;
+    color: #7fb0e0;
 }
 
 .deleteLink {
-    color: #dc2626;
+    color: #e8737d;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 0.767rem;
+    font-family: inherit;
+}
+.deleteLink:hover {
+    text-decoration: underline;
 }
 .fieldInput {
     width: 100%;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    border: 1px solid #24405c;
     padding: 0.67rem;
+    font-family: inherit;
+    font-size: 0.867rem;
+}
+.fieldInput:focus {
+    outline: none;
+    border-color: #4c8ed4;
 }
 
 .optionsManager {
@@ -58,6 +71,7 @@
     display: block;
     font-size: 0.8rem;
     font-weight: 600;
+    color: #94a9c4;
     margin-bottom: 0.67rem;
 }
 
@@ -75,30 +89,41 @@
 
 .optionInput {
     flex: 1;
-    border: 1px solid #cbd5e1;
-    border-radius: 6.7px;
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    border: 1px solid #24405c;
     padding: 0.4rem;
+    font-family: inherit;
+    font-size: 0.833rem;
+}
+.optionInput:focus {
+    outline: none;
+    border-color: #4c8ed4;
 }
 
 .deleteOptionButton {
     background: none;
     border: none;
-    color: #dc2626;
+    color: #e8737d;
     font-size: 1rem;
     cursor: pointer;
+    padding: 0 0.4rem;
 }
 
 .addOptionButton {
-    background-color: #dce2f4;
-    padding: 0.5rem 0.8rem;
-    color: #4f46e5;
-    border: none;
-    border-radius: 6.7px;
+    background-color: transparent;
+    padding: 0.4rem 0.8rem;
+    color: #7fb0e0;
+    border: 1px solid #24405c;
     cursor: pointer;
     font-size: 0.8rem;
+    font-family: inherit;
+}
+.addOptionButton:hover {
+    border-color: #4c8ed4;
 }
 .builderToolbar {
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #24405c;
     padding-top: 1.67rem;
     margin-top: 1.67rem;
 }
@@ -108,17 +133,18 @@
     gap: 0.67rem;
 }
 .toolButton {
-    background-color: #2a46a1;
-    color: white;
-    border: none;
-    border-radius: 6.7px;
+    background-color: #1a3149;
+    color: #e9eff7;
+    border: 1px solid #24405c;
     cursor: pointer;
     padding: 0.5rem 1rem;
-    font-weight: 500;
+    font-weight: 567;
+    font-family: inherit;
+    font-size: 0.867rem;
 }
 
 .toolButton:hover {
-    background-color: #4134c7;
+    border-color: #4c8ed4;
 }
 
 .configGrid {
@@ -130,7 +156,7 @@
 
 .configLabel {
     display: flex;
-    color: #64748b;
+    color: #7089a6;
     font-weight: 500;
     flex-direction: column;
     gap: 0.2rem;
@@ -139,11 +165,16 @@
 }
 
 .configInput {
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    color: #243248;
+    background-color: #0d1b2a;
+    border: 1px solid #24405c;
+    color: #e9eff7;
     padding: 0.4rem;
     font-size: 0.8rem;
+    font-family: inherit;
+}
+.configInput:focus {
+    outline: none;
+    border-color: #4c8ed4;
 }
 .configRow {
     display: flex;
@@ -155,14 +186,14 @@
     align-items: center;
     gap: 0.67rem;
     margin: 0.4rem 0;
-    color: #4f46e5;
+    color: #7fb0e0;
 }
 
 .pageDivider::after {
     content: "";
     flex: 1;
     height: 1px;
-    background-color: #d6dcea;
+    background-color: #24405c;
 }
 
 .pageDividerLabel {
@@ -176,9 +207,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #4f46e5;
+    color: #7fb0e0;
     font-size: 0.7rem;
     font-weight: 500;
+    font-family: inherit;
 }
 
 .breakButton:hover {

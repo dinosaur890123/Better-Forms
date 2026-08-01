@@ -1,11 +1,18 @@
 .testerPanel {
-    background-color: white;
-    border: 1px solid #c6ced9;
-    border-radius: 12px;
-    padding:1.67rem;
+    background-color: #14273d;
+    border: 1px solid #24405c;
+    padding: 1.67rem;
 }
 .panelHeader {
-  margin-bottom: 1.67rem;
+    margin-bottom: 1.67rem;
+    color: #94a9c4;
+    font-size: 0.867rem;
+}
+.panelHeader h2 {
+    font-size: 1.067rem;
+    font-weight: 670;
+    color: #e9eff7;
+    margin-bottom: 0.2rem;
 }
 
 .testFormCard {
@@ -16,22 +23,34 @@
 .testFormTitle {
     font-size: 1.267rem;
     font-weight: 670;
+    color: #e9eff7;
     margin-bottom: 0.67rem;
 }
 .formGroup {
+    display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 .formLabel {
     font-size: 0.867rem;
     font-weight: 600;
-    color: #19326c;
+    color: #e9eff7;
 }
 .textInput {
+    width: 100%;
     padding: 0.6rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    border: 1px solid #24405c;
     font-size: 0.9rem;
+    font-family: inherit;
+}
+.textInput::placeholder {
+    color: #7089a6;
+}
+.textInput:focus {
+    outline: none;
+    border-color: #4c8ed4;
 }
 .ratingStars {
     display: flex;
@@ -42,39 +61,50 @@
     border: none;
     font-size: 1.67rem;
     cursor: pointer;
-    color: #c0cad8;
+    color: #2c4a68;
+    line-height: 1;
 }
 .starActive {
-    color: #f59e0b;
+    color: #e0a72e;
 }
 .choiceGroup {
+    display: flex;
     flex-direction: column;
+    gap: 0.367rem;
 }
 
 .choiceLabel {
+    display: flex;
     align-items: center;
+    gap: 0.467rem;
+    font-size: 0.867rem;
+    color: #94a9c4;
+    cursor: pointer;
 }
 .radioInput {
-    accent-color: #2a46a1;
+    accent-color: #4c8ed4;
 }
 .checkboxGroup {
+    display: flex;
     align-items: center;
     gap: 0.67rem;
 }
 .checkbox {
-    accent-color: #2747b0;
+    accent-color: #4c8ed4;
 }
 .submitButton {
-    background-color: #3452b4;
-    color: white;
+    background-color: #4c8ed4;
+    color: #0d1b2a;
     border: none;
-    border-radius: 6.7px;
-    font-weight: 500;
+    padding: 0.567rem 1rem;
+    font-weight: 567;
+    font-size: 0.867rem;
+    font-family: inherit;
     cursor: pointer;
     align-self: flex-start;
 }
 .submitButton:hover {
-    background-color: #4134c7;
+    background-color: #6aa5e2;
 }
 
 .pageDivider {
@@ -82,14 +112,14 @@
     align-items: center;
     gap: 0.67rem;
     margin: 0.4rem 0;
-    color: #4f46e5;
+    color: #7fb0e0;
 }
 
 .pageDivider::after {
     content: "";
     flex: 1;
     height: 1px;
-    background-color: #d6dcea;
+    background-color: #24405c;
 }
 
 .pageDividerLabel {
@@ -100,16 +130,14 @@
 }
 
 .pageProgress {
-    height: 4px;
-    border-radius: 999px;
-    background-color: #e2e8f0;
+    height: 3px;
+    background-color: #24405c;
     overflow: hidden;
 }
 
 .pageProgressBar {
     height: 100%;
-    background-color: #3452b4;
-    transition: width 200ms ease;
+    background-color: #4c8ed4;
 }
 
 .pageNav {
@@ -121,6 +149,6 @@
 
 .pageCount {
     font-size: 0.8rem;
-    color: #64748b;
+    color: #94a9c4;
     white-space: nowrap;
 }

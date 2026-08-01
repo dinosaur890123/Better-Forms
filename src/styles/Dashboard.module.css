@@ -1,20 +1,36 @@
 .title {
     font-size: 1.67rem;
+    font-weight: 670;
+    color: #e9eff7;
+    margin-bottom: 1.5rem;
 }
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(267px, 1fr));
+    gap: 1.5rem;
 }
 .card {
-    background-color: white;
-    border: 1px solid #c6dcf7;
-    border-radius: 10px;
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 1.67rem;
     cursor: pointer;
+}
+.card:hover {
+    border-color: #4c8ed4;
+}
+.card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #e9eff7;
+}
+.card p {
+    font-size: 0.867rem;
+    color: #94a9c4;
 }
 .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.67rem;
     margin-bottom: 0.67rem;
 }

@@ -1,37 +1,52 @@
 .container {
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
-  font-family: system-ui;
 }
 .header {
-  margin-bottom: 4rem;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.67rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1.67rem;
+  border-bottom: 1px solid #24405c;
 }
 .logo {
-  /* reminder to self for logo later */
+  font-size: 1.167rem;
+  font-weight: 670;
+  color: #e9eff7;
 }
 .button {
-  background-color: #2a46a1;
-  color: white;
+  background-color: #4c8ed4;
+  color: #0d1b2a;
   padding: 0.5rem 1rem;
-  border-radius: 6.7px;
-  font-weight: 500;
+  font-weight: 567;
   font-size: 0.875rem;
-  border: 1px #3957ba;
+  font-family: inherit;
+  border: 1px solid #4c8ed4;
   cursor: pointer;
 }
 .button:hover {
-  background-color: #4134c7;
+  background-color: #6aa5e2;
+  border-color: #6aa5e2;
 }
 .main {
   flex-direction: column;
   display: flex;
   gap: 2rem;
 }
+.workspace {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(367px, 1fr));
+  gap: 1.67rem;
+  align-items: start;
+}
 .title {
   font-size: 1.5rem;
   font-weight: 600;
+  color: #e9eff7;
 }
 .grid {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -40,20 +55,20 @@
 }
 .card {
   padding: 1.67rem;
-  border: 1px solid #cbddf3;
-  border-radius: 10px;
-  background-color: white;
+  border: 1px solid #24405c;
+  background-color: #14273d;
   cursor: pointer;
 }
 .card:hover {
-  border-color: #aec8e8;
+  border-color: #4c8ed4;
 }
 .card h3 {
   font-size: 1.05rem;
   font-weight: 600;
+  color: #e9eff7;
   margin-bottom: 0.5rem;
 }
 .card p {
   font-size: 0.875rem;
-  color: #64748b;
+  color: #94a9c4;
 }

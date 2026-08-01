@@ -9,16 +9,15 @@
 }
 
 .card {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 2rem;
 }
 
 .backLink {
     display: inline-block;
     margin-bottom: 1.67rem;
-    color: #4f46e5;
+    color: #7fb0e0;
     font-size: 0.867rem;
     font-weight: 600;
     text-decoration: none;
@@ -30,21 +29,20 @@
 .pageTitle {
     font-size: 1.67rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #e9eff7;
     margin-bottom: 0.25rem;
 }
 
 .subtitle {
     font-size: 0.9rem;
-    color: #64748b;
+    color: #94a9c4;
     margin-bottom: 1.67rem;
 }
 
 .tableWrap {
     overflow-x: auto;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    background-color: #ffffff;
+    border: 1px solid #24405c;
+    background-color: #14273d;
 }
 
 .table {
@@ -56,17 +54,17 @@
 .table th {
     text-align: left;
     padding: 0.67rem 1rem;
-    background-color: #ccd5df;
-    color: #4a5a72;
+    background-color: #1a3149;
+    color: #94a9c4;
     font-weight: 600;
     white-space: nowrap;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid #24405c;
 }
 
 .table td {
   padding: 0.67rem 1rem;
-  color: #243248;
-  border-bottom: 1px solid #cfd6dc;
+  color: #e9eff7;
+  border-bottom: 1px solid #24405c;
   vertical-align: top;
 }
 
@@ -77,18 +75,16 @@
 .empty {
     padding: 3rem 1rem;
     text-align: center;
-    color: #64748b;
+    color: #94a9c4;
 }
 
 .removedTag {
     display: inline-block;
     margin-left: 0.4rem;
     padding: 0.05rem 0.35rem;
-    border-radius: 4px;
-    background-color: #e2e8f0;
-    color: #64748b;
+    background-color: #24405c;
+    color: #94a9c4;
     font-size: 0.65rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
     text-transform: uppercase;
 }

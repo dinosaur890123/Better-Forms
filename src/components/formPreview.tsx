@@ -22,7 +22,7 @@ export default function FormPreview({
         <form onSubmit={onSubmit} className={styles.testFormCard}>
             <h3 className={styles.testFormTitle}>{form.title}</h3>
         {form.fields.length === 0 ? (
-            <p style={{color: "#64748b", fontSize: "0.867rem", textAlign: "center", padding: "2rem"}}>No fields added. Add questions on the left panel</p>
+            <p style={{color: "#94a9c4", fontSize: "0.867rem", textAlign: "center", padding: "2rem"}}>No fields added. Add questions on the left panel</p>
         ):(
             form.fields.map((field, idx) => {
                 const startsPage = idx > 0 && field.page > form.fields[idx - 1].page;
@@ -36,7 +36,7 @@ export default function FormPreview({
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel}>{field.label}</label>
                     {field.config.description && (
-                        <p style={{fontSize: "0.8rem", color: "#5d718c", marginBottom: "0.4rem"}}>{field.config.description}</p>
+                        <p style={{fontSize: "0.8rem", color: "#94a9c4", marginBottom: "0.4rem"}}>{field.config.description}</p>
                     )}
 
                     {field.type === "text" && (
@@ -62,7 +62,7 @@ export default function FormPreview({
                     {field.type === 'checkbox' && (
                         <div className={styles.checkboxGroup}>
                             <input type="checkbox" id={field.id} className={styles.checkbox} checked={testResponses[field.id] || false} onChange={(e) => onTestCheckboxChange(field.id, e.target.checked)}/>
-                            <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#475569"}}>Confirm</label>
+                            <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#94a9c4"}}>Confirm</label>
                         </div>
                     )}
                 </div>

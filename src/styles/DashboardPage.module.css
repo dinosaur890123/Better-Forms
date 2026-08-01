@@ -1,6 +1,7 @@
 .title {
     font-size: 1.5rem;
     font-weight: 600;
+    color: #e9eff7;
     margin-bottom: 1.5rem;
 }
 
@@ -10,15 +11,18 @@
     gap: 1.5rem;
 }
 .card {
-    background-color: white;
-    border: 1px solid #b6c9e0;
-    border-radius: 10px;
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 1.67rem;
     cursor: pointer;
+}
+.card:hover {
+    border-color: #4c8ed4;
 }
 .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.67rem;
     margin-bottom: 0.5rem;
 }

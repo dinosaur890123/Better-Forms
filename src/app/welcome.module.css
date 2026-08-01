@@ -1,5 +1,5 @@
 .container {
-    background: linear-gradient(190deg, #0e1e35 0%, #0f2043 100%);
+    background-color: #0d1b2a;
     align-items: center;
     justify-content: center;
     padding: 1.67rem;
@@ -11,17 +11,17 @@
     text-align: center;
     max-width: 420px;
 }
-.logo { 
+.logo {
     font-size: 2.67rem;
     font-weight: 700;
-    color: #4263ae;
+    color: #e9eff7;
     margin-bottom: 0.67rem;
 }
 .tagline {
     font-size: 1rem;
     line-height: 1.67;
     margin-bottom: 2rem;
-    color: #64748b;
+    color: #94a9c4;
 }
 .actions {
     justify-content: center;
@@ -30,27 +30,31 @@
 }
 
 .button {
-    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.567rem 1.2rem;
     font-weight: 600;
     font-size: 0.9rem;
+    font-family: inherit;
     cursor: pointer;
     text-decoration: none;
 }
 
 .primary {
-    background-color: #2a49ae;
-    color: white;
-    border: 1px solid #3250b3;
+    background-color: #4c8ed4;
+    color: #0d1b2a;
+    border: 1px solid #4c8ed4;
 }
 .primary:hover {
-    background-color: #4134c7;
-    border-color: #4134c7;
+    background-color: #6aa5e2;
+    border-color: #6aa5e2;
 }
 .secondary {
-    background-color: white;
-    color: #2a46a1;
-    border: 1px solid #cbddf3;
+    background-color: transparent;
+    color: #e9eff7;
+    border: 1px solid #24405c;
 }
 .secondary:hover {
-    border-color: #aec8e8;
+    border-color: #4c8ed4;
 }

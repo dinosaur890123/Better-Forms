@@ -92,7 +92,7 @@ export default function PublicForm({form}: {form: Form}) {
         return (
             <div className={page.card} style={{textAlign: "center"}}>
                 <h1 className={styles.testFormTitle} style={{marginBottom: "0.67rem"}}>Thank you!</h1>
-                <p style={{color: "#4a5d78", fontSize: "0.867rem"}}>
+                <p style={{color: "#94a9c4", fontSize: "0.867rem"}}>
                     Your response has been recorded.
                 </p>
             </div>
@@ -103,7 +103,7 @@ export default function PublicForm({form}: {form: Form}) {
         return (
             <div className={page.card}>
                 <h1 className={styles.testFormTitle}>{form.title}</h1>
-                <p style={{marginTop: "0.67rem", color: "#596e8a"}}>This form isn't accepting responses. Contact the form owner if you need help with this.</p>
+                <p style={{marginTop: "0.67rem", color: "#94a9c4"}}>This form isn't accepting responses. Contact the form owner if you need help with this.</p>
             </div>
         )
     }
@@ -112,7 +112,7 @@ export default function PublicForm({form}: {form: Form}) {
         <form onSubmit={handleSubmit} className={page.card}>
             <h1 className={styles.testFormTitle}>{form.title}</h1>
             {form.fields.length === 0 ? (
-                <p style={{color: "#536f97", fontSize: "0.867rem"}}>
+                <p style={{color: "#94a9c4", fontSize: "0.867rem"}}>
                     This form doesn't have questions
                 </p>
             ):(
@@ -120,10 +120,10 @@ export default function PublicForm({form}: {form: Form}) {
                     <div key={field.id} className={styles.formGroup}>
                         <label className={styles.formLabel}>
                             {field.label}
-                            {field.required && <span style={{color: "#d93f3f", marginLeft: "0.2rem"}}>*</span>}
+                            {field.required && <span style={{color: "#e8737d", marginLeft: "0.2rem"}}>*</span>}
                         </label>
                         {field.config.description && (
-                            <p style={{fontSize: "0.8rem", color: "#5d718c", marginBottom: "0.4rem"}}>{field.config.description}</p>
+                            <p style={{fontSize: "0.8rem", color: "#94a9c4", marginBottom: "0.4rem"}}>{field.config.description}</p>
                         )}
 
                         {field.type === "text" && (
@@ -157,19 +157,19 @@ export default function PublicForm({form}: {form: Form}) {
                         {field.type === "checkbox" && (
                             <div className={styles.checkboxGroup}>
                                 <input type="checkbox" id={field.id} className={styles.checkbox} checked={responses[field.id] || false} onChange={(e) => setValue(field.id, e.target.checked)}/>
-                                <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#5d718c"}}>Confirm</label>
+                                <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#94a9c4"}}>Confirm</label>
                             </div>
                         )}
 
                         {fieldErrors[field.id] && (
-                            <p style={{color: "#d93f3f", fontSize: "0.8rem", marginTop: "0.3rem"}}>{fieldErrors[field.id]}</p>
+                            <p style={{color: "#e8737d", fontSize: "0.8rem", marginTop: "0.3rem"}}>{fieldErrors[field.id]}</p>
                         )}
                     </div>
                 ))
             )}
 
             {error && (
-                <p style={{color: "#d93f3f", fontSize: "0.8267rem", marginBottom: "1rem" }}>
+                <p style={{color: "#e8737d", fontSize: "0.8267rem", marginBottom: "1rem" }}>
                     {error}
                 </p>
             )}

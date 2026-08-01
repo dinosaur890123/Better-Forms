@@ -9,23 +9,21 @@
 .card {
     width: 100%;
     max-width: 367px;
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 2.67rem;
 }
 
 .logo {
     font-size: 1.267rem;
     font-weight: 670;
-    letter-spacing: -0.01em;
-    color: var(--text);
+    color: #e9eff7;
     margin-bottom: 0.267rem;
 }
 
 .subtitle {
     font-size: 0.867rem;
-    color: var(--text-muted);
+    color: #94a9c4;
     margin-bottom: 1.67rem;
 }
 
@@ -39,29 +37,27 @@
     display: block;
     font-size: 0.767rem;
     font-weight: 567;
-    color: var(--text-muted);
+    color: #94a9c4;
     margin-bottom: 0.367rem;
 }
 
 .input {
     width: 100%;
-    background-color: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    border: 1px solid #24405c;
     padding: 0.567rem 0.67rem;
     font-size: 0.867rem;
     font-family: inherit;
 }
 
 .input::placeholder {
-    color: var(--text-subtle);
+    color: #7089a6;
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    border-color: #4c8ed4;
 }
 
 .checkRow {
@@ -70,21 +66,20 @@
     gap: 0.467rem;
     margin-top: 0.67rem;
     font-size: 0.767rem;
-    color: var(--text-muted);
+    color: #94a9c4;
 }
 
 .checkRow input {
-    accent-color: var(--accent);
+    accent-color: #4c8ed4;
 }
 
 .button {
     width: 100%;
     margin-top: 0.67rem;
     padding: 0.567rem 0.9rem;
-    background-color: var(--accent);
-    color: var(--on-accent);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
+    background-color: #4c8ed4;
+    color: #0d1b2a;
+    border: none;
     cursor: pointer;
     font-size: 0.867rem;
     font-weight: 567;
@@ -92,8 +87,7 @@
 }
 
 .button:hover:not(:disabled) {
-    background-color: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background-color: #6aa5e2;
 }
 
 .button:disabled {
@@ -102,10 +96,9 @@
 }
 
 .error {
-    background-color: #fdf2f0;
-    border: 1px solid #f0cfc9;
-    color: var(--danger);
-    border-radius: var(--radius);
+    background-color: #2c1620;
+    border: 1px solid #e8737d;
+    color: #e8737d;
     padding: 0.567rem 0.67rem;
     font-size: 0.8rem;
 }
@@ -114,11 +107,11 @@
     text-align: center;
     margin-top: 1.467rem;
     font-size: 0.767rem;
-    color: var(--text-muted);
+    color: #94a9c4;
 }
 
 .link {
-    color: var(--accent);
+    color: #7fb0e0;
     text-decoration: none;
     font-weight: 567;
 }

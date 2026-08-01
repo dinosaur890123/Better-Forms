@@ -1,16 +1,16 @@
 .page {
     max-width: 900px;
     margin: 0 auto;
+    padding: 3rem 1.67rem;
 }
 
 .backLink {
-    color: var(--accent);
+    color: #7fb0e0;
     font-weight: 670;
     font-size: 0.867rem;
     display: inline-block;
     text-decoration: none;
     margin-bottom: 1.67rem;
-
 }
 .backLink:hover {
     text-decoration: underline;
@@ -18,41 +18,45 @@
 
 .stat {
     font-size: 2rem;
-    color: var(--accent);
+    color: #7fb0e0;
     font-weight: 670;
+    font-variant-numeric: tabular-nums;
 }
 
 .statUnit {
+    font-size: 0.867rem;
     font-weight: 567;
-    color: #7c90ad;
+    color: #94a9c4;
 }
 .pageTitle {
+    font-size: 1.67rem;
     font-weight: 767;
-    color: #131e37;
+    color: #e9eff7;
+    margin-bottom: 0.25rem;
 }
 
 .subtitle {
     font-size: 0.967rem;
-    color: #64748b;
+    color: #94a9c4;
     margin-bottom: 1.67rem;
 }
 .empty {
     text-align: center;
-    color: #64748b;
-    background: white;
+    color: #94a9c4;
+    background-color: #14273d;
     padding: 3rem 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border: 1px solid #24405c;
 }
 
 .grid {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(367px, 1fr));
+    gap: 1.67rem;
 }
 
 .card {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    background-color: #14273d;
+    border: 1px solid #24405c;
     padding: 1.67rem;
 }
 .cardHeader {
@@ -60,21 +64,24 @@
     justify-content: space-between;
     margin-bottom: 1rem;
     display: flex;
+    gap: 0.67rem;
 }
 
 .fieldLabel {
     font-weight: 670;
-    color: #0f173a;
+    color: #e9eff7;
     font-size: 1rem;
 }
 
 .badge {
     font-size: 0.67rem;
     font-weight: 670;
-    color: var(--accent);
-    border-radius: 670px;
-    padding: 0.3rem 0.67rem;
+    color: #7fb0e0;
+    background-color: #1a3149;
+    border: 1px solid #24405c;
+    padding: 0.15rem 0.55rem;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .barRow {
@@ -82,6 +89,7 @@
     margin-bottom: 0.67rem;
     gap: 0.67rem;
     display: flex;
+    font-size: 0.833rem;
 }
 
 .barLabel {
@@ -90,26 +98,26 @@
     flex-shrink: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #4f627c;
-}
-.barFill {
-    border-radius: 670px;
-    height: 100%;
-    background: var(--accent);
-}
-.barValue {
-    color: #64748b;
-    text-align: right;
-    width: 67px;
+    color: #94a9c4;
 }
 .barTrack {
     flex: 1;
     height: 10px;
-    background: #f1f5f9;
-    border-radius: 670px;
+    background-color: #24405c;
     overflow: hidden;
+}
+.barFill {
+    height: 100%;
+    background-color: #4c8ed4;
+}
+.barValue {
+    color: #94a9c4;
+    text-align: right;
+    width: 67px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
 }
 .textSummary {
     font-size: 0.867rem;
-    color: #455770;
+    color: #94a9c4;
 }

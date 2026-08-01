@@ -308,14 +308,14 @@ export default function Home() {
                 Share
               </button>
             )}
-            <span style={{fontSize: "0.867rem", color: "var(--text-muted)", minWidth: "3.67rem"}}>
+            <span style={{fontSize: "0.867rem", color: "#94a9c4", minWidth: "3.67rem"}}>
                 {saveStatus === "saving" ? "Saving…" : saveStatus === "saved" ? "Saved" : ""}
               </span>
             <button className="button button-secondary" onClick={handleToggleAccepting} disabled={isSaving}>{activeForm?.isAccepting ? "Accepting: On":"Accepting: Off"}</button>
             <button className="button button-secondary" onClick={() => {setSelectedFormId(null); setTestResponses({});}} disabled={isSaving}>Back to Forms</button>
             {userEmail && (
             <>
-              <span style={{fontSize: "0.767rem", color: "#4b6a94"}}>{userEmail}</span>
+              <span style={{fontSize: "0.767rem", color: "#94a9c4"}}>{userEmail}</span>
               <button className="button button-secondary" onClick={handleLogout}>Logout</button>
             </>
           )}

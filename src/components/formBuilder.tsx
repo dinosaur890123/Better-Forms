@@ -49,7 +49,7 @@ export default function FormBuilder({
 
                         <input type="text" className={styles.fieldInput} value={field.label} onChange={(e) => onUpdateFieldLabel(field.id, e.target.value)} placeholder="Enter question label here"/>
 
-                        <label style={{display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", marginTop: "0.4rem", color: "var(--text-muted)"}}>
+                        <label style={{display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", marginTop: "0.4rem", color: "#94a9c4"}}>
                             <input type="checkbox" checked={field.required} onChange={(e) => onToggleRequired(field.id, e.target.checked)}/>
                             Required
                         </label>
