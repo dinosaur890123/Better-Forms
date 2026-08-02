@@ -49,8 +49,14 @@
     width: 22px;
     height: 22px;
     background-color: #1a3149;
+    display: flex;
 }
 .optionLabel {
     font-size: 0.767rem;
     color: #e9eff7;
+    line-height: 1.267;
+}
+.noResults {
+    font-size: 0.8rem;
+    color: #7089a6;
 }
