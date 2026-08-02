@@ -19,6 +19,10 @@ export const FIELD_TYPES: Record<FieldType, FieldMeta> = {
     dropdown: {label: "Dropdown", icon: "▾", group: "Choices", defaultLabel: "Pick one", defaultOptions: ["Option 1","Option 2"], answerable: true},
     multiselect: {label: "Checkboxes", icon: "☑", group: "Choices", defaultLabel: "Select all that apply", defaultOptions: ["Option 1","Option 2"], answerable: true},
     checkbox:  {label: "Single checkbox", icon: "✓", group: "Choices", defaultLabel: "New checkbox option", answerable: true},
+    rating: {label: "Rating", icon: "★", group: "Scale", defaultLabel: "Rate your experience", answerable: true},
+    date: {label: "Date", icon: "▦", group: "Time", defaultLabel: "Pick a date", answerable: true},
+    heading: {label: "Heading", icon: "H", group: "Layout",  defaultLabel: "Section heading", answerable: false},
+    paragraph: {label: "Paragraph", icon: "¶", group: "Layout", defaultLabel: "Some text to explain", answerable: false},
 }
 
 export const FIELD_GROUPS = ["Text", "Choices", "Scale", "Time", "Layout"];
