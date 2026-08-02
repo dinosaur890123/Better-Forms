@@ -4,7 +4,6 @@ import styles from "../styles/FormBuilder.module.css";
 
 interface FormBuilderProps {
     form: Form;
-    onAddField: (type: "text" | "checkbox" | "choice" | "rating" | "email") => void;
     onDeleteField: (fieldId: string) => void;
     onUpdateFieldLabel: (fieldId: string, label: string) => void;
     onToggleRequired: (fieldId: string, required: boolean) => void;
@@ -16,7 +15,7 @@ interface FormBuilderProps {
 }
 
 export default function FormBuilder({
-    form, onAddField, onDeleteField, onUpdateFieldLabel, onToggleRequired, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption, onUpdateFieldConfig, onTogglePageBreak
+    form, onDeleteField, onUpdateFieldLabel, onToggleRequired, onAddChoiceOption, onUpdateChoiceOption, onDeleteChoiceOption, onUpdateFieldConfig, onTogglePageBreak
 }: FormBuilderProps) {
     return (
         <div className={styles.editorPanel}>
@@ -101,25 +100,9 @@ export default function FormBuilder({
                     );
                 })}
             </div>
-        <div className={styles.builderToolbar}>
-        <div className={styles.toolbarGrid}>
-          <button className={styles.toolButton} onClick={() => onAddField("text")}>
-            Text
-          </button>
-          <button className={styles.toolButton} onClick={() => onAddField("email")}>
-            Email
-          </button>
-          <button className={styles.toolButton} onClick={() => onAddField("choice")}>
-            Choice
-          </button>
-          <button className={styles.toolButton} onClick={() => onAddField("rating")}>
-            Rating
-          </button>
-          <button className={styles.toolButton} onClick={() => onAddField("checkbox")}>
-            Checkbox
-          </button>
+            {form.fields.length === 0 && (
+                <p className={styles.emptyHint}>Pick a field from the left to add your first question.</p>
+            )}
         </div>
-      </div>
-    </div>
     );
 }

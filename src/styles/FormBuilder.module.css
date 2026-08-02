@@ -122,29 +122,10 @@
 .addOptionButton:hover {
     border-color: #4c8ed4;
 }
-.builderToolbar {
-    border-top: 1px solid #24405c;
-    padding-top: 1.67rem;
-    margin-top: 1.67rem;
-}
-.toolbarGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 0.67rem;
-}
-.toolButton {
-    background-color: #1a3149;
-    color: #e9eff7;
-    border: 1px solid #24405c;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    font-weight: 567;
-    font-family: inherit;
-    font-size: 0.867rem;
-}
-
-.toolButton:hover {
-    border-color: #4c8ed4;
+.emptyHint {
+    font-size: 0.833rem;
+    color: #7089a6;
+    padding: 1.67rem 0;
 }
 
 .configGrid {

@@ -9,6 +9,7 @@ import Dashboard from "../../components/dashboard";
 import CreateFormModal from "../../components/createFormModal";
 import FormBuilder from "../../components/formBuilder";
 import FormPreview from "../../components/formPreview";
+import FieldSidebar from "../../components/FieldSidebar";
 import {getForms, createForm, deleteForm, saveFormFields, submitFormResponse, getSessionUser, updateFormSettings} from "../actions";
 import ConfirmModal from "../../components/ConfirmModal";
 
@@ -332,9 +333,9 @@ export default function Home() {
         ):(
           activeForm && (
             <div className={styles.workspace}>
-              <FormBuilder 
+              <FieldSidebar onAddField={addField}/>
+              <FormBuilder
                 form={activeForm}
-                onAddField={addField}
                 onDeleteField={deleteField}
                 onUpdateFieldLabel={updateFieldLabel}
                 onToggleRequired={toggleRequired}

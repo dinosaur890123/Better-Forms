@@ -1,6 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import {FieldType} from "../types/form";
+import styles from "../styles/FieldSidebar.module.css";
 
 interface FieldOption {
     type: FieldType;
@@ -15,7 +16,7 @@ const GROUPS: {label: string; items: FieldOption[]}[] = [
             {type: "text", label: "Short answer", icon: "T"},
             {type: "email", label: "Email", icon: "@"},
         ],
-    }
+    },
     {
         label: "Choices",
         items:[
@@ -31,7 +32,7 @@ const GROUPS: {label: string; items: FieldOption[]}[] = [
     },
 ];
 
-export default function ({onAddField}:{onAddField:(type: FieldType)=> void}) {
+export default function FieldSidebar({onAddField}:{onAddField:(type: FieldType)=> void}) {
     const [query, setQuery] = useState("");
     const term = query.trim().toLowerCase();
 
@@ -44,7 +45,7 @@ export default function ({onAddField}:{onAddField:(type: FieldType)=> void}) {
 
     return(
         <aside className={styles.sidebar}>
-            <input type="search" className={styles.search} value={query}onChange={(e) => setQuery(e.target.value)} placeholder="Search fields"/>
+            <input type="search" className={styles.search} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search fields"/>
 
             {groups.length === 0 ? (
                 <p className={styles.noResults}>No fields are found</p>
@@ -53,8 +54,8 @@ export default function ({onAddField}:{onAddField:(type: FieldType)=> void}) {
                     <div key={group.label} className={styles.group}>
                         <h3 className={styles.groupLabel}>{group.label}</h3>
                         <div className={styles.optionGrid}>
-                            {groups.items.map((item)=> (
-                                <button key={item.type} type="button" onClick={() => onAddField(item.type)}>
+                            {group.items.map((item)=> (
+                                <button key={item.type} type="button" className={styles.option} onClick={() => onAddField(item.type)}>
                                     <span className={styles.optionIcon}>{item.icon}</span>
                                     <span className={styles.optionLabel}>{item.label}</span>
                                 </button>

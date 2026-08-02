@@ -13,6 +13,8 @@
     width: 100%;
     background-color: #0d1b2a;
     color: #e9eff7;
+    border: 1px solid #24405c;
+    padding: 0.5rem 0.67rem;
     margin-bottom: 1.167rem;
     font-family: inherit;
     font-size: 0.867rem;
@@ -30,8 +32,11 @@
 }
 .groupLabel {
     font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     color: #7089a6;
     text-transform: uppercase;
+    margin-bottom: 0.567rem;
 }
 
 .optionGrid {
@@ -41,7 +46,12 @@
 }
 .option {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.367rem;
+    background-color: #0d1b2a;
     border: 1px solid #24405c;
+    padding: 0.6rem;
     cursor: pointer;
     font-family: inherit;
     text-align: left;
@@ -55,7 +65,11 @@
     width: 22px;
     height: 22px;
     background-color: #1a3149;
+    color: #7fb0e0;
+    font-size: 0.75rem;
+    font-weight: 700;
     display: flex;
+    flex-shrink: 0;
 }
 .optionLabel {
     font-size: 0.767rem;

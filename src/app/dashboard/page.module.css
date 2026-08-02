@@ -1,5 +1,5 @@
 .container {
-  max-width: 1100px;
+  max-width: 1367px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
 }
@@ -39,9 +39,15 @@
 }
 .workspace {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(367px, 1fr));
+  grid-template-columns: 220px minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.67rem;
   align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
 }
 .title {
   font-size: 1.5rem;
