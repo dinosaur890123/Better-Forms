@@ -1,0 +1,56 @@
+.sidebar {
+    background-color: #162b44;
+    border: 1px solid #24405c;
+    padding: 1rem;
+    position: sticky;
+}
+
+.search {
+    width: 100%;
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    margin-bottom: 1.167rem;
+}
+.search::placeholder {
+    color: #7089a6;
+}
+.search:focus {
+    outline: none;
+    border-color: #4c8ed4;
+}
+
+.group {
+    margin-bottom: 1.167rem;
+}
+.groupLabel {
+    font-size: 0.67rem;
+    color: #7089a6;
+    text-transform: uppercase;
+}
+
+.optionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.467rem;
+}
+.option {
+    display: flex;
+    border: 1px solid #24405c;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+}
+.option:hover {
+    border-color: #4c8ed4;
+}
+.optionIcon {
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background-color: #1a3149;
+}
+.optionLabel {
+    font-size: 0.767rem;
+    color: #e9eff7;
+}
