@@ -13,7 +13,7 @@ const GROUPS: {label: string; items: FieldOption[]}[] = [
     {
         label: "Text",
         items: [
-            {type: "text", label: "Short answer", icon: "T"},
+            {type: "text", label: "Short answer", icon: "Aa"},
             {type: "email", label: "Email", icon: "@"},
         ],
     },
