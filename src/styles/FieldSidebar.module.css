@@ -3,6 +3,10 @@
     border: 1px solid #24405c;
     padding: 1rem;
     position: sticky;
+    align-self: start;
+    top: 1.67rem;
+    max-height: calc(100vh - 3.67rem);
+    overflow-y: auto;
 }
 
 .search {
@@ -10,6 +14,8 @@
     background-color: #0d1b2a;
     color: #e9eff7;
     margin-bottom: 1.167rem;
+    font-family: inherit;
+    font-size: 0.867rem;
 }
 .search::placeholder {
     color: #7089a6;
@@ -57,6 +63,6 @@
     line-height: 1.267;
 }
 .noResults {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #7089a6;
 }
