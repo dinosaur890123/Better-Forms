@@ -152,3 +152,29 @@
     color: #94a9c4;
     white-space: nowrap;
 }
+
+.textArea {
+    width: 100%;
+    padding: 0.67rem;
+    background-color: #0d1b2a;
+    color: #e9eff7;
+    border: 1px solid #24405c;
+    font-family: inherit;
+}
+.textArea:focus {
+    outline: none;
+    border-color: #4c8ed4;
+}
+
+.headingField {
+    font-size: 1.067rem;
+    font-weight: 670;
+    color: #e9eff7;
+    margin-top: 0.67rem;
+}
+
+.paragraphField {
+    font-size: 0.867rem;
+    color: #94a9c4;
+    line-height: 1.67;
+}

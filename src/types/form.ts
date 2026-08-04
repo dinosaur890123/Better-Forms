@@ -1,4 +1,8 @@
-export type FieldType = "text" | "email" | "choice" | "rating" | "checkbox";
+export type FieldType =
+  | "text" | "textarea" | "email" | "url" | "number"
+  | "choice" | "dropdown" | "multiselect" | "checkbox"
+  | "rating" | "date"
+  | "heading" | "paragraph";
 export interface FormField {
   id: string;
   label: string;
@@ -21,4 +25,6 @@ export interface FieldConfig {
   placeholder?: string;
   minLength?: number;
   maxLength?: number;
+  min?: number;
+  max?: number;
 }

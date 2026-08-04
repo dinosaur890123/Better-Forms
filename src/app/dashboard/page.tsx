@@ -4,7 +4,8 @@ import {signOut} from "../auth/actions";
 import {useState, useEffect, useRef} from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-import {Form, FormField, FieldConfig} from "../../types/form";
+import {Form, FormField, FieldConfig, FieldType} from "../../types/form";
+import {FIELD_TYPES} from "../../lib/fieldTypes";
 import Dashboard from "../../components/dashboard";
 import CreateFormModal from "../../components/createFormModal";
 import FormBuilder from "../../components/formBuilder";
@@ -109,13 +110,17 @@ export default function Home() {
   };
   
 
-  const addField = (type: "text" | "checkbox" | "choice" | "rating" | "email") => {
+  const addField = (type: FieldType) => {
     if (!activeForm) return;
+    const meta = FIELD_TYPES[type];
     const newField: FormField = {
-      id: crypto.randomUUID(), label: type === "text" ? "New text question" : type === "email" ? "New email question" : type === "rating" ? "Rate your experience"
-          : type === "choice"
-          ? "Select an option"
-          : "New Checkbox option", type, required: false, page: activeForm.fields.length ? activeForm.fields[activeForm.fields.length - 1].page : 0, config: {}, ...(type === "choice" ? {options: ["Option 1", "Option 2"]} : {})
+      id: crypto.randomUUID(),
+      label: meta.defaultLabel,
+      type,
+      required: false,
+      page: activeForm.fields.length ? activeForm.fields[activeForm.fields.length - 1].page : 0,
+      config: {},
+      ...(meta.defaultOptions ? {options: [...meta.defaultOptions]} : {})
     };
 
     setForms(
@@ -254,13 +259,6 @@ export default function Home() {
     });
   };
 
-  const handleTestCheckboxChange = (fieldId: string, checked: boolean) => {
-    setTestResponses({
-      ...testResponses,
-      [fieldId]: checked
-    });
-  }
-
   const handleToggleAccepting = async () => {
     if (!activeForm) return;
     const next = !activeForm.isAccepting;
@@ -349,7 +347,6 @@ export default function Home() {
                 form={activeForm}
                 testResponses={testResponses}
                 onTestValueChange={handleTestValueChange}
-                onTestCheckboxChange={handleTestCheckboxChange}
                 onSubmit={testSubmit}
               />              
             </div>

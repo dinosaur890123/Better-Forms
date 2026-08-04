@@ -3,6 +3,7 @@ import {getOwnedForm, getFormSubmissions} from "../../../actions";
 import {FormField} from "../../../../types/form";
 import styles from "../../../../styles/Analytics.module.css";
 import {formatDuration} from "../../../../lib/time";
+import {FIELD_TYPES} from "../../../../lib/fieldTypes";
 import {notFound} from "next/navigation";
 
 function Bar({label, count, total}: {label: string; count: number; total: number}) {
@@ -35,11 +36,21 @@ function FieldAnalytics({field, values, total}: {field: FormField; values: any[]
             </>
         );
     }
-    if (field.type === "choice") {
+    if (field.type === "choice" || field.type === "dropdown") {
         return (
             <>
             {(field.options || []).map((opt) => (
                 <Bar key={opt} label={opt} count={values.filter((v) => v === opt).length} total={total}/>
+            ))}
+            </>
+        );
+    }
+
+    if (field.type === "multiselect") {
+        return (
+            <>
+            {(field.options || []).map((opt) => (
+                <Bar key={opt} label={opt} count={values.filter((v) => Array.isArray(v) && v.includes(opt)).length} total={total}/>
             ))}
             </>
         );
@@ -87,7 +98,7 @@ export default async function AnalyticsPage({params}: {params: Promise<{id: stri
                     </div>
                 )}
                 <div className={styles.grid}>
-                    {form.fields.map((field) => {
+                    {form.fields.filter((f) => FIELD_TYPES[f.type]?.answerable).map((field) => {
                         const values = submissions.map((s) => s.answers[field.id]).filter((v) => v !== undefined && v !== null && v !== "");
 
                         return (

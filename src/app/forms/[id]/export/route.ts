@@ -1,6 +1,7 @@
 import {getOwnedForm, getFormSubmissions, getFormFieldHistory} from "../../../actions";
 import {formatAnswer} from "../../../../lib/answers";
 import {formatDuration} from "../../../../lib/time";
+import {FIELD_TYPES} from "../../../../lib/fieldTypes";
 
 function escapeCell(value: string): string {
     const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}`:value;
@@ -16,7 +17,7 @@ export async function GET(_request: Request, {params}: {params: Promise<{id: str
         getFormFieldHistory(id),
     ]);
     const columns = history.filter(
-        (f) => !f.deleted || submissions.some((s) => s.answers[f.id] !== undefined)
+        (f) => FIELD_TYPES[f.type]?.answerable && (!f.deleted || submissions.some((s) => s.answers[f.id] !== undefined))
     );
 
     const header = ["Submitted", "Time spent", ...columns.map((f) => (f.deleted ? `${f.label} (removed)` : f.label))];

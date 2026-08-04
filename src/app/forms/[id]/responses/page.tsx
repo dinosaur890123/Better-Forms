@@ -4,6 +4,7 @@ import {getOwnedForm, getFormSubmissions, getFormFieldHistory} from "../../../ac
 import {formatAnswer} from "../../../../lib/answers";
 import styles from "../../../../styles/PublicPage.module.css";
 import {formatDuration} from "../../../../lib/time";
+import {FIELD_TYPES} from "../../../../lib/fieldTypes";
 export const dynamic = "force-dynamic";
 
 export default async function ResponsesPage({
@@ -20,7 +21,7 @@ export default async function ResponsesPage({
     ]);
 
     const columns = history.filter(
-        (field) => !field.deleted || submissions.some((s) => s.answers[field.id] !== undefined)
+        (field) => FIELD_TYPES[field.type]?.answerable && (!field.deleted || submissions.some((s) => s.answers[field.id] !== undefined))
     );
 
     return (

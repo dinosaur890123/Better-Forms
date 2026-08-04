@@ -8,7 +8,7 @@ export interface FieldMeta {
     defaultOptions?: string[];
     answerable: boolean;
 }
-
+export const FIELD_GROUPS = ["Text", "Choices", "Scale", "Time", "Layout"];
 export const FIELD_TYPES: Record<FieldType, FieldMeta> = {
     text: {label: "Short answer", icon: "T", group: "Text", defaultLabel: "New text question", answerable: true},
     textarea: {label: "Long answer", icon: "≡", group: "Text", defaultLabel: "Tell us some more", answerable: true},
@@ -22,7 +22,5 @@ export const FIELD_TYPES: Record<FieldType, FieldMeta> = {
     rating: {label: "Rating", icon: "★", group: "Scale", defaultLabel: "Rate your experience", answerable: true},
     date: {label: "Date", icon: "▦", group: "Time", defaultLabel: "Pick a date", answerable: true},
     heading: {label: "Heading", icon: "H", group: "Layout",  defaultLabel: "Section heading", answerable: false},
-    paragraph: {label: "Paragraph", icon: "¶", group: "Layout", defaultLabel: "Some text to explain", answerable: false},
-}
-
-export const FIELD_GROUPS = ["Text", "Choices", "Scale", "Time", "Layout"];
+    paragraph: {label: "Paragraph", icon: "¶", group: "Layout", defaultLabel: "Explain in more detail", answerable: false}
+};

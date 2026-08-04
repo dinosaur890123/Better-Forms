@@ -3,6 +3,8 @@ import React, {useState, useRef, useMemo} from "react";
 import {Form, FormField} from "../types/form";
 import {submitFormResponse} from "../app/actions";
 import {validateAnswers} from "../lib/validation";
+import {FIELD_TYPES} from "../lib/fieldTypes";
+import FieldInput from "./fieldInput";
 import styles from "../styles/FormPreview.module.css";
 import page from "../styles/PublicPage.module.css";
 
@@ -118,48 +120,17 @@ export default function PublicForm({form}: {form: Form}) {
             ):(
                 currentFields.map((field) => (
                     <div key={field.id} className={styles.formGroup}>
-                        <label className={styles.formLabel}>
-                            {field.label}
-                            {field.required && <span style={{color: "#e8737d", marginLeft: "0.2rem"}}>*</span>}
-                        </label>
+                        {FIELD_TYPES[field.type]?.answerable && (
+                            <label className={styles.formLabel}>
+                                {field.label}
+                                {field.required && <span style={{color: "#e8737d", marginLeft: "0.2rem"}}>*</span>}
+                            </label>
+                        )}
                         {field.config.description && (
                             <p style={{fontSize: "0.8rem", color: "#94a9c4", marginBottom: "0.4rem"}}>{field.config.description}</p>
                         )}
 
-                        {field.type === "text" && (
-                            <input type="text" placeholder={field.config.placeholder||"Your answer..."} className={styles.textInput} value={responses[field.id]||""} onChange={(e) => setValue(field.id, e.target.value)}/>
-                        )}
-                        
-
-                        {field.type === "email" && (
-                            <input type="email" placeholder={field.config.placeholder||"67@example.com"} className={styles.textInput} value={responses[field.id]||""} onChange={(e) => setValue(field.id, e.target.value)}/>
-                        )}
-
-                        {field.type === "rating" && (
-                            <div className={styles.ratingStars}>
-                                {[1,2,3,4,5].map((star) => (
-                                    <button key={star} type="button" className={`${styles.starButton} ${(responses[field.id] || 0) >= star ? styles.starActive : ""}`} onClick={() => setValue(field.id, star)}>★</button>
-                                ))}
-                            </div>
-                        )}
-
-                        {field.type === "choice" && (
-                            <div className={styles.choiceGroup}>
-                                {field.options?.map((option, optIdx) => (
-                                    <label key={optIdx} className={styles.choiceLabel}>
-                                        <input type="radio" name={`choice-${field.id}`} value={option} checked={responses[field.id] === option} onChange={() => setValue(field.id, option)} className={styles.radioInput}/>
-                                        <span>{option}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        )}
-
-                        {field.type === "checkbox" && (
-                            <div className={styles.checkboxGroup}>
-                                <input type="checkbox" id={field.id} className={styles.checkbox} checked={responses[field.id] || false} onChange={(e) => setValue(field.id, e.target.checked)}/>
-                                <label htmlFor={field.id} style={{fontSize: "0.867rem", color: "#94a9c4"}}>Confirm</label>
-                            </div>
-                        )}
+                        <FieldInput field={field} value={responses[field.id]} onChange={(v) => setValue(field.id, v)}/>
 
                         {fieldErrors[field.id] && (
                             <p style={{color: "#e8737d", fontSize: "0.8rem", marginTop: "0.3rem"}}>{fieldErrors[field.id]}</p>

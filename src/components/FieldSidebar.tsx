@@ -1,36 +1,13 @@
 "use client";
 import React, {useState} from "react";
+import {FIELD_TYPES, FIELD_GROUPS} from "../lib/fieldTypes";
 import {FieldType} from "../types/form";
 import styles from "../styles/FieldSidebar.module.css";
 
-interface FieldOption {
-    type: FieldType;
-    label: string;
-    icon: string;
-}
 
-const GROUPS: {label: string; items: FieldOption[]}[] = [
-    {
-        label: "Text",
-        items: [
-            {type: "text", label: "Short answer", icon: "Aa"},
-            {type: "email", label: "Email", icon: "@"},
-        ],
-    },
-    {
-        label: "Choices",
-        items:[
-            {type: "choice", label: "Multiple choice", icon: "◉"}, // peak icon i found lmao
-            {type: "checkbox", label: "Checkbox", icon: "✓"},
-        ],
-    },
-    {
-        label: "Scale",
-        items: [
-            {type: "rating", label: "Rating", icon: "★"}
-        ],
-    },
-];
+const GROUPS = FIELD_GROUPS.map((label)=> ({
+    label, items: (Object.keys(FIELD_TYPES) as FieldType[]).filter((type)=> FIELD_TYPES[type].group === label).map((type)=>({type,...FIELD_TYPES[type]})),
+}));
 
 export default function FieldSidebar({onAddField}:{onAddField:(type: FieldType)=> void}) {
     const [query, setQuery] = useState("");

@@ -1,6 +1,7 @@
 import React from "react";
 import {Form, FieldConfig} from "../types/form";
 import styles from "../styles/FormBuilder.module.css";
+import {FIELD_TYPES} from "../lib/fieldTypes";
 
 interface FormBuilderProps {
     form: Form;
@@ -48,10 +49,12 @@ export default function FormBuilder({
 
                         <input type="text" className={styles.fieldInput} value={field.label} onChange={(e) => onUpdateFieldLabel(field.id, e.target.value)} placeholder="Enter question label here"/>
 
-                        <label style={{display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", marginTop: "0.4rem", color: "#94a9c4"}}>
-                            <input type="checkbox" checked={field.required} onChange={(e) => onToggleRequired(field.id, e.target.checked)}/>
-                            Required
-                        </label>
+                        {FIELD_TYPES[field.type]?.answerable && (
+                            <label style={{display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", marginTop: "0.4rem", color: "#94a9c4"}}>
+                                <input type="checkbox" checked={field.required} onChange={(e) => onToggleRequired(field.id, e.target.checked)}/>
+                                Required
+                            </label>
+                        )}
 
                         <div className={styles.configGrid}>
                             <label className={styles.configLabel}>
@@ -59,14 +62,14 @@ export default function FormBuilder({
                                 <input type="text" className={styles.configInput} value={field.config.description ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{description: e.target.value})} placeholder="Shown under the question"/>
                             </label>
 
-                            {(field.type === "text" || field.type === "email") && (
+                            {["text", "textarea", "email", "url", "number"].includes(field.type) && (
                                 <label className={styles.configLabel}>
                                     Placeholder
                                     <input type="text" className={styles.configInput} value={field.config.placeholder ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{placeholder: e.target.value})} placeholder={field.type === "email"?"67@example.com" : "Your response..."}/>
                                 </label>
                             )}
 
-                            {field.type === "text" && (
+                            {(field.type === "text" || field.type === "textarea") && (
                                 <div className={styles.configRow}>
                                     <label className={styles.configLabel}>
                                         Min length
@@ -79,9 +82,23 @@ export default function FormBuilder({
                                     </label>
                                 </div>
                             )}
+
+                            {field.type === "number" && (
+                                <div className={styles.configRow}>
+                                    <label className={styles.configLabel}>
+                                        Min
+                                        <input type="number" className={styles.configInput} value={field.config.min ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{min: e.target.value===""?undefined:Number(e.target.value)})}/>
+                                    </label>
+
+                                    <label className={styles.configLabel}>
+                                        Max
+                                        <input type="number" className={styles.configInput} value={field.config.max ?? ""} onChange={(e)=>onUpdateFieldConfig(field.id,{max: e.target.value===""?undefined:Number(e.target.value)})}/>
+                                    </label>
+                                </div>
+                            )}
                         </div>
 
-                        {field.type === "choice" && (
+                        {(field.type === "choice" || field.type === "dropdown" || field.type === "multiselect") && (
                             <div className={styles.optionsManager}>
                                 <label className={styles.optionsLabel}>Options:</label>
                                 <div className={styles.optionsList}>
